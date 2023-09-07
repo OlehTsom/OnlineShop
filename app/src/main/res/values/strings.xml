@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">OnlineShop</string>
+    <string name="rightAddress">The Right Address\nFor Shopping\nAny day</string>
+    <string name="quality">It is now very easy to reach the\nbest quality among the\nproducts on the internet!</string>
+    <string name="snacbar_reset_text_login_fragment">Reset link was send o your email</string>
+    <string name="snackbar_maximum_amount_text_cardFragmrnt">This is the maximum amount available!</string>
+    <string name="delete_alert_dialog_text_title">Delete item from cart</string>
+    <string name="delete_alert_dialog_text_message">Do you want to delete this item from cart?</string>
+    <string name="delete_alert_dialog_text_negativ_button">Cancel</string>
+    <string name="delete_alert_dialog_text_positiv_button">Yes</string>
+    <string name="main_viewpager_name_fragment">Main</string>
+    <string name="zweite_viewpager_name_fragment">T-shirts</string>
+    <string name="dritte_viewpager_name_fragment">Jackets</string>
+    <string name="vierte_viewpager_name_fragment">Suits</string>
+    <string name="funfte_viewpager_name_fragment">Jeans</string>
+    <string name="sexte_viewpager_name_fragment">Trousers</string>
+    <string name="snackbar_select_color_and_size_text">Select color and size if available!</string>
+    <string name="snackbar_max_amount_text_details_fragment">You have the maximum number of products in your cart!</string>
+    <string name="snackbar_success_add_product_to_car_details_fragment">Product successfully added!</string>
+    <string name="select_address">Please select and address</string>
+    <string name="orders_items">Orders items</string>
+    <string name="do_you_want_to_order_you_cart_items">Do you want to order you cart items?</string>
+</resources>
