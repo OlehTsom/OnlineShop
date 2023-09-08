@@ -20,4 +20,7 @@
     <string name="select_address">Please select and address</string>
     <string name="orders_items">Orders items</string>
     <string name="do_you_want_to_order_you_cart_items">Do you want to order you cart items?</string>
+    <string name="message_support_tab_layout">Message</string>
+    <string name="call_support_tab_layout">Call</string>
+    <string name="location_support_tab_layout">Location</string>
 </resources>
