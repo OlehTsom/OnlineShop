@@ -4,21 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarSupport"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/imageCloseSupportFrag"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Support contact us"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/imageCloseSupportFrag"
+                app:layout_constraintStart_toStartOf="@id/imageCloseSupportFrag"
+                app:layout_constraintTop_toTopOf="@id/imageCloseSupportFrag" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.cardview.widget.CardView
+        app:cardElevation="0dp"
         android:id="@+id/cardTabLayoutSupportFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSupport">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutSupportFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabMode="fixed"
             android:layout_marginTop="5dp"
             app:tabIndicator="@null"
-            app:tabRippleColor="@color/white"
+            app:tabRippleColor="@null"
             app:tabSelectedTextColor="@color/black"
             app:tabTextAppearance="@style/tabLayout_text" />
 
