@@ -73,7 +73,11 @@
             app:destination="@id/billingFragment" />
         <action
             android:id="@+id/action_profileFragment_to_supportFragment"
-            app:destination="@id/supportFragment" />
+            app:destination="@id/supportFragment"
+            app:enterAnim="@anim/from_righ"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/productsDetailsFragment"
@@ -155,5 +159,19 @@
     <fragment
         android:id="@+id/supportFragment"
         android:name="com.example.onlineshop.fragments.settings.SupportFragment"
-        android:label="SupportFragment" />
+        android:label="SupportFragment"
+        tools:layout="@layout/fragment_support">
+        <action
+            android:id="@+id/action_supportFragment_to_messageSupportFragment"
+            app:destination="@id/messageSupportFragment"
+            app:enterAnim="@anim/from_righ"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageSupportFragment"
+        android:name="com.example.onlineshop.fragments.settings.supportSections.MessageSupportFragment"
+        android:label="MessageSupportFragment"
+        tools:layout="@layout/fragment_support_message"/>
 </navigation>
