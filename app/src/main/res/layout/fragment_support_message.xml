@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/g_blue_gray200"
     android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,32 +12,56 @@
 
 
 
-                <TextView
-                    android:id="@+id/tvContactForm"
-                    style="@style/h4"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbarSupport"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:text="Contact Form"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:layout_height="75dp"
+                    android:background="@color/light_blue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                                <ImageView
+                                    android:id="@+id/imageCloseSupportFrag"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/arrow_back"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:tint="@color/white" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_light"
+                                    android:text="Support contact us"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="@id/imageCloseSupportFrag"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="@id/imageCloseSupportFrag" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="-25dp"
-                    app:cardCornerRadius="25dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvContactForm"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbarSupport"
                     app:layout_constraintVertical_bias="0.26">
 
                         <LinearLayout
@@ -171,7 +194,7 @@
                                     android:layout_marginTop="25dp"
                                     android:layout_marginEnd="25dp"
                                     android:layout_marginBottom="40dp"
-                                    android:background="@drawable/blue_background"
+                                    android:background="@drawable/corner_radius_button"
                                     android:fontFamily="@font/poppins_light"
                                     android:text="Send"
                                     android:textAllCaps="false"

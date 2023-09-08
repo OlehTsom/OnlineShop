@@ -26,4 +26,6 @@
     <color name="g_green">#11FF00</color>
     <color name="selected_color">#FF0000</color>
     <color name="unselected_color">#00FF00</color>
+    <color name="light_blue">#007aff</color>
+    <color name="white_so_litel_grey">#f7f7f7</color>
 </resources>
