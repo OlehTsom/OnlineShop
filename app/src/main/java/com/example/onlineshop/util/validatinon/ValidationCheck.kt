@@ -65,7 +65,7 @@ fun validateState(state : String) : AddressValidation {
     return AddressValidation.Success
 }
 
-fun validateMess(mess : String) : MessageValidation {
+fun validateMessInMessageSupport(mess : String) : MessageValidation {
     if(mess.isEmpty())
         return MessageValidation.Failed("State cannot be empty")
     if(mess.length <= 100)
