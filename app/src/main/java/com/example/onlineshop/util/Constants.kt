@@ -18,5 +18,6 @@ object Constants {
     const val BUNDLE_KEY_PRODUCT = "product"
     const val FIELD_PATH_NAME = "name"
     const val COLLECTION_PATH_ORDERS = "orders"
+    const val COLLECTION_PATH_SUPPORT = "Support"
 
 }

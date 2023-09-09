@@ -1,11 +1,12 @@
 package com.example.onlineshop.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.onlineshop.data.SupportMessage
+import com.example.onlineshop.util.Constants.COLLECTION_PATH_SUPPORT
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.util.validatinon.MessageValidation
 import com.example.onlineshop.util.validatinon.MessageValidationFailedState
-import com.example.onlineshop.util.validatinon.RegisterFailedState
 import com.example.onlineshop.util.validatinon.validateEmailInMessageSupport
 import com.example.onlineshop.util.validatinon.validateMessInMessageSupport
 import com.example.onlineshop.util.validatinon.validateNameInMessageSupport
@@ -15,6 +16,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class SupportViewModel(
@@ -29,8 +31,17 @@ class SupportViewModel(
     val validation = _validation.receiveAsFlow()
 
     fun sendMessageForSupport(message: SupportMessage){
+        viewModelScope.launch{_sendMessageState.emit(Resource.Loading())}
         if (validateMessage(message)){
-
+            firestore.collection(COLLECTION_PATH_SUPPORT)
+                .document()
+                .set(message)
+                .addOnSuccessListener {
+                    viewModelScope.launch{_sendMessageState.emit(Resource.Success(Unit))}
+                }
+                .addOnFailureListener {
+                    viewModelScope.launch{_sendMessageState.emit(Resource.Error(it.message.toString()))}
+                }
         }else{
             val messageFailedState = MessageValidationFailedState(
                 validateNameInMessageSupport(message.name),
