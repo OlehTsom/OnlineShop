@@ -1,4 +1,4 @@
-package com.example.onlineshop.util
+package com.example.onlineshop.util.validatinon
 
 sealed class RegisterValidation() {
     object Success: RegisterValidation()

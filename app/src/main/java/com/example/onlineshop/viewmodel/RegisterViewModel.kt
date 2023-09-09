@@ -3,21 +3,18 @@ package com.example.onlineshop.viewmodel
 import androidx.lifecycle.ViewModel
 import com.example.onlineshop.data.User
 import com.example.onlineshop.util.Constants.USER_COLLECTION
-import com.example.onlineshop.util.RegisterFailedState
-import com.example.onlineshop.util.RegisterValidation
+import com.example.onlineshop.util.validatinon.RegisterFailedState
+import com.example.onlineshop.util.validatinon.RegisterValidation
 import com.example.onlineshop.util.Resource
-import com.example.onlineshop.util.validateEmail
-import com.example.onlineshop.util.validatePassword
+import com.example.onlineshop.util.validatinon.validateEmail
+import com.example.onlineshop.util.validatinon.validatePassword
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
 
 class RegisterViewModel(

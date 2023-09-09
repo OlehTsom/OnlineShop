@@ -13,9 +13,8 @@ import com.example.onlineshop.data.Address
 import com.example.onlineshop.databinding.FragmentAddressBinding
 import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
 import com.example.onlineshop.helper.customSnackbarForError
-import com.example.onlineshop.util.AddressValidation
-import com.example.onlineshop.util.AddressValidationFailedState
-import com.example.onlineshop.util.RegisterValidation
+import com.example.onlineshop.util.validatinon.AddressValidation
+import com.example.onlineshop.util.validatinon.AddressValidationFailedState
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.viewmodel.AddressViewModel
 import kotlinx.coroutines.Dispatchers

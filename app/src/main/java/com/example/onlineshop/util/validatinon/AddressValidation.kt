@@ -1,4 +1,4 @@
-package com.example.onlineshop.util
+package com.example.onlineshop.util.validatinon
 
 sealed class AddressValidation(){
     object Success : AddressValidation()

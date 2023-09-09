@@ -12,9 +12,8 @@ import com.example.onlineshop.R
 
 import com.example.onlineshop.data.User
 import com.example.onlineshop.databinding.FragmentRegisterBinding
-import com.example.onlineshop.util.AddressValidation
-import com.example.onlineshop.util.RegisterFailedState
-import com.example.onlineshop.util.RegisterValidation
+import com.example.onlineshop.util.validatinon.RegisterFailedState
+import com.example.onlineshop.util.validatinon.RegisterValidation
 import com.example.onlineshop.viewmodel.RegisterViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

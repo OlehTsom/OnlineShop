@@ -5,15 +5,13 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.util.Util
 import com.example.onlineshop.ShopApp
 import com.example.onlineshop.data.User
 import com.example.onlineshop.util.Constants.COLLECTION_PATH_USER
-import com.example.onlineshop.util.RegisterValidation
+import com.example.onlineshop.util.validatinon.RegisterValidation
 import com.example.onlineshop.util.Resource
-import com.example.onlineshop.util.validateEmail
+import com.example.onlineshop.util.validatinon.validateEmail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference

@@ -2,10 +2,7 @@ package com.example.onlineshop.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onlineshop.util.RegisterValidation
 import com.example.onlineshop.util.Resource
-import com.example.onlineshop.util.validateEmail
-import com.example.onlineshop.util.validatePassword
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableSharedFlow
