@@ -9,7 +9,7 @@ data class SupportMessage(
     val phoneNumber : String,
     val name : String,
     val message : String,
-    val data: String = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(Date())
+    val date: String = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(Date())
 ){
     constructor() : this("","","","","")
 }

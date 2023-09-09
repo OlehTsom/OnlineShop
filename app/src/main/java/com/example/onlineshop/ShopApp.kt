@@ -14,6 +14,7 @@ import com.example.onlineshop.viewmodel.OrderViewModel
 import com.example.onlineshop.viewmodel.ProfileViewModel
 import com.example.onlineshop.viewmodel.RegisterViewModel
 import com.example.onlineshop.viewmodel.SearchViewModel
+import com.example.onlineshop.viewmodel.SupportViewModel
 import com.example.onlineshop.viewmodel.UserAccountViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -35,6 +36,7 @@ class ShopApp : Application(), KodeinAware {
         bind() from singleton {FirebaseCommon(instance(),instance())}
         bind() from singleton {  FirebaseStorage.getInstance().reference }
 
+        bind() from provider { SupportViewModel(instance(),instance()) }
         bind() from provider { ProfileViewModel(instance(),instance()) }
         bind() from provider { AllOrdersViewModel(instance(),instance()) }
         bind() from provider { UserAccountViewModel(instance(),instance(),instance(),instance()) }

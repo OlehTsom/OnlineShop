@@ -23,4 +23,5 @@
     <string name="message_support_tab_layout">Message</string>
     <string name="call_support_tab_layout">Call</string>
     <string name="location_support_tab_layout">Location</string>
+    <string name="wait_for_a_reply">Your message has been successfully sent, please wait for a reply to your email.</string>
 </resources>

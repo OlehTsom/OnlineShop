@@ -110,7 +110,7 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent">
                                         <com.google.android.material.textfield.TextInputEditText
-                                            android:id="@+id/edLastName"
+                                            android:id="@+id/edMail"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:hint="Mail"
@@ -187,7 +187,7 @@
 
 
                                 <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                                    android:id="@+id/buttonSave"
+                                    android:id="@+id/buttonSend"
                                     android:layout_width="match_parent"
                                     android:layout_height="45dp"
                                     android:layout_marginStart="25dp"
@@ -197,7 +197,9 @@
                                     android:background="@drawable/corner_radius_button"
                                     android:fontFamily="@font/poppins_light"
                                     android:text="Send"
+                                    android:layout_gravity="center"
                                     android:textAllCaps="false"
+                                    app:spinning_bar_color="@color/white"
                                     android:textColor="@color/white"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />

@@ -10,8 +10,8 @@ import com.example.onlineshop.R
 import com.example.onlineshop.databinding.FragmentSupportBinding
 import com.example.onlineshop.helper.hideBottomNavigation
 
-class SupportFragment : Fragment() {
-    lateinit var binding: FragmentSupportBinding
+class SupportFragment : Fragment(){
+    private lateinit var binding: FragmentSupportBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +32,6 @@ class SupportFragment : Fragment() {
         binding.butWriteUs.setOnClickListener {
             findNavController().navigate(R.id.action_supportFragment_to_messageSupportFragment)
         }
-
     }
 
     override fun onResume() {

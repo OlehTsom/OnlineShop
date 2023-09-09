@@ -1,5 +1,6 @@
 package com.example.onlineshop.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onlineshop.data.SupportMessage
@@ -55,9 +56,9 @@ class SupportViewModel(
     }
 
     private fun validateMessage(mess: SupportMessage) : Boolean{
-        val validateName = validateNameInMessageSupport(mess.name)
-        val validateEmail = validateEmailInMessageSupport(mess.email)
-        val validateMessage = validateMessInMessageSupport(mess.message)
+        val validateName = validateNameInMessageSupport(mess.name.trim())
+        val validateEmail = validateEmailInMessageSupport(mess.email.trim())
+        val validateMessage = validateMessInMessageSupport(mess.message.trim())
 
         val shouldValidation = validateName is MessageValidation.Success
                 && validateEmail is MessageValidation.Success

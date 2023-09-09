@@ -1,5 +1,6 @@
 package com.example.onlineshop.util.validatinon
 
+import android.util.Log
 import android.util.Patterns
 
 fun validateEmail(email : String) : RegisterValidation {
@@ -67,9 +68,10 @@ fun validateState(state : String) : AddressValidation {
 
 fun validateMessInMessageSupport(mess : String) : MessageValidation {
     if(mess.isEmpty())
-        return MessageValidation.Failed("State cannot be empty")
-    if(mess.length <= 100)
-        return MessageValidation.Failed("The message must contain a minimum of 100 symbols")
+        return MessageValidation.Failed("Message cannot be empty")
+
+    if(mess.length <= 50)
+        return MessageValidation.Failed("The message must contain a minimum of 50 symbols")
 
     return MessageValidation.Success
 }
