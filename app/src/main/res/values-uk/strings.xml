@@ -16,7 +16,7 @@
     <string name="sexte_viewpager_name_fragment">Брюки</string>
     <string name="snackbar_select_color_and_size_text">Виберіть колір і розмір, якщо є!</string>
     <string name="snackbar_max_amount_text_details_fragment">У вашому кошику максимальна кількість даного товару в наявності!</string>
-    <string name="snackbar_success_add_product_to_car_details_fragment">У вашому кошику максимальна кількість даного товару!</string>
+    <string name="snackbar_success_add_product_to_car_details_fragment">Товар успішно доданий до кошику!</string>
     <string name="select_address">Виберіть адресу</string>
     <string name="orders_items">Будь ласка, виберіть адресу доставки!</string>
     <string name="do_you_want_to_order_you_cart_items">Бажаєте замовити товари в кошику?</string>
