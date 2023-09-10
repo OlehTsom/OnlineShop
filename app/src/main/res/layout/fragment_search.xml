@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/search_box_background"
-                android:hint="Search Now"
+                android:hint="@string/search_now"
                 android:paddingStart="20dp"
 
                 android:paddingTop="10dp"

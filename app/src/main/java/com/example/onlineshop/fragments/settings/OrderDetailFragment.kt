@@ -73,11 +73,11 @@ class OrderDetailFragment : Fragment() {
 
     private fun setupTextViewAndRvList(order: Order) {
         binding.apply {
-            tvOrderId.text = getString(R.string.order_word) + {order.orderId}
+            tvOrderId.text = getString(R.string.order_word) + order.orderId
             tvAddress.text = "${order.address.street}, ${order.address.state}"
             tvPhoneNumber.text = order.address.phone
             tvFullName.text = order.address.fullName
-            tvTotalPrice.text = getString(R.string.dolar) +{order.totalPrice}
+            tvTotalPrice.text = getString(R.string.dolar) + order.totalPrice
 
             productsAdapter.differ.submitList(order.products)
 

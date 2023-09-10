@@ -61,7 +61,7 @@
             app:layout_constraintRight_toRightOf="@id/tvQuality"
             app:layout_constraintLeft_toLeftOf="@id/tvQuality"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Register"
+            android:text="@string/register"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -73,7 +73,7 @@
             app:layout_constraintRight_toRightOf="@id/tvQuality"
             app:layout_constraintLeft_toLeftOf="@id/tvQuality"
             android:layout_marginTop="10dp"
-            android:text="Login"
+            android:text="@string/login"
             />
 
 

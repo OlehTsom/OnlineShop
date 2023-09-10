@@ -17,12 +17,9 @@
     <string name="snackbar_select_color_and_size_text">Select color and size if available!</string>
     <string name="snackbar_max_amount_text_details_fragment">You have the maximum number of products in your cart!</string>
     <string name="snackbar_success_add_product_to_car_details_fragment">Product successfully added!</string>
-    <string name="select_address">Please select and address</string>
+    <string name="select_address">Please select an address</string>
     <string name="orders_items">Orders items</string>
     <string name="do_you_want_to_order_you_cart_items">Do you want to order you cart items?</string>
-    <string name="message_support_tab_layout">Message</string>
-    <string name="call_support_tab_layout">Call</string>
-    <string name="location_support_tab_layout">Location</string>
     <string name="wait_for_a_reply">Your message has been successfully sent, please wait for a reply to your email.</string>
     <string name="dolar">$</string>
     <string name="error">"Error: "</string>
@@ -103,4 +100,6 @@
     <string name="text_about_send_mess_for_reset_pass">We will send you the password reset link to your email</string>
     <string name="cancel">Cancel</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="add_to_cart_detail">Add to cart</string>
+    <string name="your_shopping_cart_is_empty">Your shopping cart is empty</string>
 </resources>
