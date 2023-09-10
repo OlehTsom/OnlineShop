@@ -21,6 +21,7 @@ import com.example.onlineshop.data.OrderStatus
 import com.example.onlineshop.databinding.FragmentBillingBinding
 import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
 import com.example.onlineshop.helper.customSnackbarForError
+import com.example.onlineshop.util.Constants.BUNDLE_KEY_ADDRESS
 import com.example.onlineshop.util.HorizontalItemDecoration
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.viewmodel.BillingViewModel
@@ -123,7 +124,7 @@ class BillingFragment : Fragment(), KodeinAware {
                         binding.buttonPlaceOrder.revertAnimation()
                         findNavController().navigateUp()
                         customSnackbarForCompleteAddProductToCart(
-                            "Your order was placed",
+                            getString(R.string.your_order_was_placed),
                             R.dimen.snackbar_margin_bottom_details
                         )
                     }
@@ -144,7 +145,7 @@ class BillingFragment : Fragment(), KodeinAware {
         addressAdapters.onClick = {
             selectedAddress = it
             if (!args.payment) {
-                val bundle = Bundle().apply { putParcelable("address", it) }
+                val bundle = Bundle().apply { putParcelable(BUNDLE_KEY_ADDRESS, it) }
                 findNavController().navigate(R.id.action_billingFragment_to_addressFragment, bundle)
             }
         }

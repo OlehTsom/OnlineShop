@@ -54,7 +54,7 @@ class CardFragment : Fragment(), KodeinAware {
             viewModel.productsPrice.collectLatest { price ->
                 price?.let {
                     totalPrice = it.replace(",", ".").toFloat()
-                    binding.tvTotalPrice.text = "$$price"
+                    binding.tvTotalPrice.text = getString(R.string.dolar) + price
                 }
             }
         }

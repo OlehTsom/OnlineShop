@@ -1,6 +1,7 @@
 package com.example.onlineshop
 
 import android.app.Application
+import android.content.Context
 import com.example.onlineshop.firebase.FirebaseCommon
 import com.example.onlineshop.viewmodel.AddressViewModel
 import com.example.onlineshop.viewmodel.AllOrdersViewModel
@@ -29,6 +30,15 @@ import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 class ShopApp : Application(), KodeinAware {
+
+    companion object {
+        private lateinit var appContext: Context
+
+        fun getAppContext(): Context {
+            return appContext
+        }
+    }
+
     override val kodein: Kodein = Kodein.lazy {
         import(androidXModule(this@ShopApp))
         bind() from singleton { Firebase.firestore }
@@ -50,5 +60,10 @@ class ShopApp : Application(), KodeinAware {
         bind() from provider { RegisterViewModel(instance(),instance())}
         bind() from provider { LoginViewModel(instance()) }
         bind() from provider { IntroductionViewModel(this@ShopApp,instance()) }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        appContext = applicationContext
     }
 }

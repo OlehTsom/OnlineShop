@@ -89,7 +89,8 @@ class LoginFragment: Fragment(), KodeinAware{
                             getString(R.string.snacbar_reset_text_login_fragment), Snackbar.LENGTH_LONG).show()
                     }
                     is Resource.Error ->{
-                        Snackbar.make(requireView(),"Error: ${it.message.toString()}", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(requireView(),
+                            getString(R.string.error) + {it.message.toString()}, Snackbar.LENGTH_LONG).show()
                     }
                     else -> Unit
                 }

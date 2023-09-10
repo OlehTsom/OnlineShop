@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onlineshop.data.Order
 import com.example.onlineshop.util.Constants.COLLECTION_PATH_CART
+import com.example.onlineshop.util.Constants.COLLECTION_PATH_ORDERS
 import com.example.onlineshop.util.Constants.COLLECTION_PATH_USER
 import com.example.onlineshop.util.Resource
 import com.google.firebase.auth.FirebaseAuth
@@ -25,13 +26,13 @@ class OrderViewModel(
         firestore.runBatch {batch ->
             firestore.collection(COLLECTION_PATH_USER)
                 .document(auth.uid!!)
-                .collection("orders")
+                .collection(COLLECTION_PATH_ORDERS)
                 .document()
                 .set(order)
 
             val orderFroAdmin = order.copy(userUid = auth.uid!!)
 
-            firestore.collection("orders")
+            firestore.collection(COLLECTION_PATH_ORDERS)
                 .document()
                 .set(orderFroAdmin)
 

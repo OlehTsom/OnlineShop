@@ -24,4 +24,24 @@
     <string name="call_support_tab_layout">Call</string>
     <string name="location_support_tab_layout">Location</string>
     <string name="wait_for_a_reply">Your message has been successfully sent, please wait for a reply to your email.</string>
+    <string name="dolar">$</string>
+    <string name="error">"Error: "</string>
+    <string name="order_word">Order #</string>
+    <string name="address_updated_successfully">Address updated successfully</string>
+    <string name="address_deleted_successfully">Address deleted successfully</string>
+    <string name="your_order_was_placed">Your order was placed</string>
+    <string name="check_your_inputs">Check your inputs</string>
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="wrong_email_format">Wrong email format</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="password_should_contains_6_char">Password should contains 6 char</string>
+    <string name="address_title_cannot_be_empty">Address title cannot be empty</string>
+    <string name="full_name_cannot_be_empty">Full name cannot be empty</string>
+    <string name="street_cannot_be_empty">Street  cannot be empty</string>
+    <string name="wrong_phone_number_format">Wrong phone number format</string>
+    <string name="phone_number_cannot_be_empty">Phone number cannot be empty</string>
+    <string name="city_cannot_be_empty">City cannot be empty</string>
+    <string name="state_cannot_be_empty">State cannot be empty</string>
+    <string name="message_cannot_be_empty">Message cannot be empty</string>
+    <string name="the_message_must_contain_a_minimum_of_50_symbols">The message must contain a minimum of 50 symbols</string>
 </resources>

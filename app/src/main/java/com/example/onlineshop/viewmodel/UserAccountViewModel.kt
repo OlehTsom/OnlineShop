@@ -6,6 +6,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.onlineshop.R
 import com.example.onlineshop.ShopApp
 import com.example.onlineshop.data.User
 import com.example.onlineshop.util.Constants.COLLECTION_PATH_USER
@@ -29,7 +30,7 @@ class UserAccountViewModel(
     private val firestore: FirebaseFirestore,
     private val aunt: FirebaseAuth,
     private val storage: StorageReference,
-    app : Application
+    val app : Application
 ) : AndroidViewModel(app) {
 
     private val _user = MutableStateFlow<Resource<User>>(Resource.Unspecified())
@@ -68,7 +69,7 @@ class UserAccountViewModel(
                 && user.lastName.trim().isNotEmpty()
         if (!areInputValidation){
             viewModelScope.launch {
-                viewModelScope.launch { _updateInfo.emit(Resource.Error("Check your inputs"))}
+                viewModelScope.launch { _updateInfo.emit(Resource.Error(app.applicationContext.getString(R.string.check_your_inputs)))}
             }
             return
         }

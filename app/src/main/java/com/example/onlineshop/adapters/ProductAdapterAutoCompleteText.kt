@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
+import com.example.onlineshop.R
 import com.example.onlineshop.data.Product
 import com.example.onlineshop.databinding.BestDealsRvItemBinding
 import com.example.onlineshop.fragments.shoping.ProductClickListener
@@ -37,13 +38,13 @@ class ProductAdapterAutoCompleteText(
 
 
         if(product.offerPercentage == null || product.offerPercentage == 0f) {
-            binding.tvOldPrice.text = "$" + product.price
+            binding.tvOldPrice.text = context.getString(R.string.dolar) + product.price
             binding.tvOldPrice.paintFlags = 0
             binding.tvNewPrice.visibility = View.GONE
         }else{
-            binding.tvOldPrice.text = "$" + product.price
+            binding.tvOldPrice.text = context.getString(R.string.dolar) + product.price
             binding.tvOldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            binding.tvNewPrice.text = "$" + product.offerPercentage.getProductPrice(product.price)
+            binding.tvNewPrice.text = context.getString(R.string.dolar) + product.offerPercentage.getProductPrice(product.price)
 
         }
 

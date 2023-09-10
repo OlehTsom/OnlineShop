@@ -97,7 +97,8 @@ class AddressFragment : Fragment(), KodeinAware {
                     is Resource.Success ->{
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
-                        customSnackbarForCompleteAddProductToCart("Address updated successfully",
+                        customSnackbarForCompleteAddProductToCart(
+                            getString(R.string.address_updated_successfully),
                             R.dimen.snackbar_margin_bottom_details)
                     }
                     is Resource.Error ->{
@@ -137,7 +138,8 @@ class AddressFragment : Fragment(), KodeinAware {
                     is Resource.Success ->{
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
-                        customSnackbarForCompleteAddProductToCart("Address deleted successfully",
+                        customSnackbarForCompleteAddProductToCart(
+                            getString(R.string.address_deleted_successfully),
                             R.dimen.snackbar_margin_bottom_details)
                     }
                     is Resource.Error ->{

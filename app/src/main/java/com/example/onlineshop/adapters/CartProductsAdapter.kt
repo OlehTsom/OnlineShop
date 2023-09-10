@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.onlineshop.R
 import com.example.onlineshop.data.CartProduct
 import com.example.onlineshop.data.Product
 import com.example.onlineshop.databinding.CartProductItemBinding
@@ -24,8 +25,8 @@ class  CartProductsAdapter : RecyclerView.Adapter<CartProductsAdapter.CardProduc
 
             Glide.with(itemView).load(cartProduct.product.images[0]).into(binding.imageCardProduct)
 
-            binding.tvProductCardPrice.text = "$" + cartProduct.product.price
-            binding.tvProductCardPrice.text = "$" + cartProduct.product.offerPercentage
+            binding.tvProductCardPrice.text = itemView.context.getString(R.string.dolar) + cartProduct.product.price
+            binding.tvProductCardPrice.text = itemView.context.getString(R.string.dolar) + cartProduct.product.offerPercentage
                     .getProductPrice(cartProduct.product.price)
 
 

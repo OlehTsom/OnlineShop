@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.onlineshop.R
 import com.example.onlineshop.data.Product
 import com.example.onlineshop.databinding.BestDealsRvItemBinding
 import com.example.onlineshop.helper.getProductPrice
@@ -17,8 +18,8 @@ class BestDealsProductsAdapter : RecyclerView.Adapter<BestDealsProductsAdapter.B
         fun bind(product: Product){
             binding.apply {
                 tvDealProductName.text = product.name
-                tvNewPrice.text = "$" + product.offerPercentage.getProductPrice(product.price)
-                tvOldPrice.text = "$" + product.price.toString()
+                tvNewPrice.text = itemView.context.getString(R.string.dolar) + product.offerPercentage.getProductPrice(product.price)
+                tvOldPrice.text = itemView.context.getString(R.string.dolar) + product.price.toString()
                 tvOldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 Glide.with(itemView).load(product.images[0]).into(binding.imgBestDeal)
             }

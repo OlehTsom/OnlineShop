@@ -17,7 +17,7 @@ class SpecialProductsAdapter : RecyclerView.Adapter<SpecialProductsAdapter.Speci
         : RecyclerView.ViewHolder(binding.root){
             fun bind(product: Product){
                 binding.tvSpecialProductName.text = product.name
-                binding.tvSpecialPrdouctPrice.text = "$" + product.price
+                binding.tvSpecialPrdouctPrice.text = itemView.context.getString(R.string.dolar) + product.price
                 Glide.with(itemView).load(product.images[0]).into(binding.imageSpecialRvItem)
             }
         }

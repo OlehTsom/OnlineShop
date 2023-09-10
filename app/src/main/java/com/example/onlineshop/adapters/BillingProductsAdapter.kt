@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.onlineshop.R
 import com.example.onlineshop.data.CartProduct
 import com.example.onlineshop.databinding.BillingProductsRvItemBinding
 import com.example.onlineshop.helper.getProductPrice
@@ -22,8 +23,8 @@ class BillingProductsAdapter : RecyclerView.Adapter<BillingProductsAdapter.Billi
                 tvBillingProductAmount.text = billingProduct.amount.toString()
                 tvCartProductSize.text = billingProduct.selectedSize
 
-                tvProductCartPrice.text = "$" + billingProduct.product.price
-                tvProductCartPrice.text = "$" + billingProduct.product.offerPercentage
+                tvProductCartPrice.text = itemView.context.getString(R.string.dolar) + billingProduct.product.price
+                tvProductCartPrice.text = itemView.context.getString(R.string.dolar) + billingProduct.product.offerPercentage
                     .getProductPrice(billingProduct.product.price)
 
                 imageCartProductColor.setImageDrawable(ColorDrawable(billingProduct.selectedColor ?: Color.TRANSPARENT))
