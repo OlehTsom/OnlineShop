@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins_thin"
-                    android:text="Best products"
+                    android:text="@string/best_products"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     app:layout_constraintStart_toStartOf="@id/rvOfferSearchCategory"

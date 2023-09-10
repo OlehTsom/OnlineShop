@@ -35,7 +35,7 @@
             android:layout_marginTop="15dp"
             app:layout_constraintTop_toBottomOf="@+id/tvAppName"
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
-            android:text="Let’s Login"
+            android:text="@string/let_s_login"
             android:textAlignment="center"/>
         <TextView
             android:id="@+id/tvDontHaveAccount"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvLetsLogin"
             android:textAlignment="center"
             android:gravity="center"
-            android:text="Don’t have an account Register"
+            android:text="@string/dont_have_an_account_register"
             android:layout_marginTop="@dimen/tvQualityMarginTop"/>
 
         <EditText
@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             app:layout_constraintTop_toBottomOf="@+id/tvDontHaveAccount"
             style="@style/editText"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:layout_marginTop="50dp"
             />
@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             app:layout_constraintTop_toBottomOf="@+id/etEmailLogin"
             style="@style/editText"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:layout_marginTop="15dp"
             />
@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin"
             android:textAlignment="center"
             android:gravity="center"
-            android:text="Forgot password"
+            android:text="@string/forgot_password"
             android:textColor="@color/black"
                 />
 
@@ -96,7 +96,7 @@
             app:layout_constraintRight_toRightOf="@id/guidelineLoginRight"
             app:layout_constraintLeft_toLeftOf="@id/guidelineLoginLeft"
             android:layout_marginTop="15dp"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <ImageView
             android:id="@+id/facebookLogin"

@@ -162,7 +162,7 @@
                     android:layout_height="wrap_content"
                     style="@style/h3"
                     android:textColor="@color/black"
-                    android:text="Color"/>
+                    android:text="@string/color"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvColors"
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     style="@style/h3"
                     android:textColor="@color/black"
-                    android:text="Size"/>
+                    android:text="@string/size"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvSizes"

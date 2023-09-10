@@ -55,7 +55,7 @@
             android:layout_height="25dp"
             android:background="@drawable/blue_background"
             android:fontFamily="@font/poppins_light"
-            android:text="Add to cart"
+            android:text="@string/add_to_cart"
             android:textColor="@color/white"
             android:textSize="10sp"
             android:textStyle="bold"

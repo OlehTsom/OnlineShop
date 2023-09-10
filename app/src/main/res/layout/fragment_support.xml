@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_light"
-                android:text="Support contact us"
+                android:text="@string/support_contact_us"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/imageCloseSupportFrag"
@@ -85,7 +85,7 @@
             android:fontFamily="@font/poppins_thin"
             android:gravity="center"
             android:padding="5dp"
-            android:text="How we can help you?"
+            android:text="@string/how_we_can_help_you"
             android:textColor="@color/g_gray700My"
             android:textSize="23dp"
             android:textStyle="bold" />
@@ -97,7 +97,7 @@
             android:fontFamily="@font/poppins_thin"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Contact us to create your first message and get real-time support."
+            android:text="@string/type_your_first_mess"
             android:textColor="@color/g_gray500"
             android:textSize="16dp" />
 
@@ -113,7 +113,7 @@
         android:background="@drawable/corner_radius_button"
         android:bottomLeftRadius="50dp"
         android:bottomRightRadius="50dp"
-        android:text="Write to us"
+        android:text="@string/write_to_us"
         android:textColor="@color/white"
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp"

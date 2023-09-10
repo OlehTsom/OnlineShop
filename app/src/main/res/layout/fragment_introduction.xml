@@ -63,7 +63,7 @@
         style="@style/blueButtonStyle"
         android:layout_width="@dimen/smallButtonWith"
         android:layout_height="@dimen/smallButtonHeight"
-        android:text="Start"
+        android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/tvQuality"
         app:layout_constraintRight_toRightOf="@id/tvQuality"
