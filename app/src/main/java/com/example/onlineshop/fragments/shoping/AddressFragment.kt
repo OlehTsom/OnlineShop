@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.onlineshop.R
 import com.example.onlineshop.data.Address
 import com.example.onlineshop.databinding.FragmentAddressBinding
-import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
+import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.helper.customSnackbarForError
 import com.example.onlineshop.util.validatinon.AddressValidation
 import com.example.onlineshop.util.validatinon.AddressValidationFailedState
@@ -97,7 +97,7 @@ class AddressFragment : Fragment(), KodeinAware {
                     is Resource.Success ->{
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
-                        customSnackbarForCompleteAddProductToCart(
+                        customSnackbarForComplete(
                             getString(R.string.address_updated_successfully),
                             R.dimen.snackbar_margin_bottom_details)
                     }
@@ -138,7 +138,7 @@ class AddressFragment : Fragment(), KodeinAware {
                     is Resource.Success ->{
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
-                        customSnackbarForCompleteAddProductToCart(
+                        customSnackbarForComplete(
                             getString(R.string.address_deleted_successfully),
                             R.dimen.snackbar_margin_bottom_details)
                     }

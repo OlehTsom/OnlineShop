@@ -18,7 +18,7 @@ import com.example.onlineshop.R
 import com.example.onlineshop.data.User
 import com.example.onlineshop.databinding.FragmentUserAccountBinding
 import com.example.onlineshop.dialog.setUpBottomSheetDialog
-import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
+import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.helper.customSnackbarForError
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.viewmodel.UserAccountViewModel
@@ -100,7 +100,7 @@ class UserAccountFragment : Fragment(),KodeinAware {
 
                     }
                     is Resource.Success ->{
-                        customSnackbarForCompleteAddProductToCart(getString(R.string.snacbar_reset_text_login_fragment),
+                        customSnackbarForComplete(getString(R.string.snacbar_reset_text_login_fragment),
                             R.dimen.snackbar_margin_bottom_details)
                     }
                     is Resource.Error ->{

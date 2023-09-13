@@ -48,7 +48,7 @@ fun Fragment.customSnackbarForError(text: String, marginBottom: Int) {
 }
 
 
-fun Fragment.customSnackbarForCompleteAddProductToCart(text: String, marginBottom: Int) {
+fun Fragment.customSnackbarForComplete(text: String, marginBottom: Int) {
     val snackbar = this.view?.let { Snackbar.make(it, "", Snackbar.LENGTH_SHORT) }
     val snackbarLayout = snackbar?.view as Snackbar.SnackbarLayout
     val inflater = LayoutInflater.from(view?.context)

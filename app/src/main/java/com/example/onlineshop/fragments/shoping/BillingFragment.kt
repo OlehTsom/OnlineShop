@@ -2,7 +2,6 @@ package com.example.onlineshop.fragments.shoping
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ import com.example.onlineshop.data.CartProduct
 import com.example.onlineshop.data.Order
 import com.example.onlineshop.data.OrderStatus
 import com.example.onlineshop.databinding.FragmentBillingBinding
-import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
+import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.helper.customSnackbarForError
 import com.example.onlineshop.util.Constants.BUNDLE_KEY_ADDRESS
 import com.example.onlineshop.util.HorizontalItemDecoration
@@ -123,7 +122,7 @@ class BillingFragment : Fragment(), KodeinAware {
                     is Resource.Success -> {
                         binding.buttonPlaceOrder.revertAnimation()
                         findNavController().navigateUp()
-                        customSnackbarForCompleteAddProductToCart(
+                        customSnackbarForComplete(
                             getString(R.string.your_order_was_placed),
                             R.dimen.snackbar_margin_bottom_details
                         )

@@ -16,7 +16,7 @@ import com.example.onlineshop.adapters.SizesAdapter
 import com.example.onlineshop.adapters.ViewPager2ImagesAdapter
 import com.example.onlineshop.data.CartProduct
 import com.example.onlineshop.databinding.FragmentProductDetailsBinding
-import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
+import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.helper.customSnackbarForError
 import com.example.onlineshop.helper.getProductPrice
 import com.example.onlineshop.helper.hideBottomNavigation
@@ -109,7 +109,7 @@ class ProductsDetailsFragment : Fragment(),KodeinAware {
                     is Resource.Success -> {
                         binding.butAddToCart.revertAnimation()
                         binding.butAddToCart.background = resources.getDrawable(R.color.black)
-                        customSnackbarForCompleteAddProductToCart(
+                        customSnackbarForComplete(
                             getString(R.string.snackbar_success_add_product_to_car_details_fragment),
                             R.dimen.snackbar_margin_bottom_details)
                     }

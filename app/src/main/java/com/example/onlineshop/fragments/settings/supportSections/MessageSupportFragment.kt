@@ -1,7 +1,6 @@
 package com.example.onlineshop.fragments.settings.supportSections
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.onlineshop.R
 import com.example.onlineshop.data.SupportMessage
 import com.example.onlineshop.databinding.FragmentSupportMessageBinding
-import com.example.onlineshop.helper.customSnackbarForCompleteAddProductToCart
+import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.util.validatinon.MessageValidation
 import com.example.onlineshop.util.validatinon.MessageValidationFailedState
@@ -54,7 +53,7 @@ class MessageSupportFragment : Fragment(), KodeinAware {
                     }
                     is Resource.Success ->{
                         binding.buttonSend.revertAnimation()
-                        customSnackbarForCompleteAddProductToCart(
+                        customSnackbarForComplete(
                             getString(R.string.wait_for_a_reply),
                             R.dimen.snackbar_margin_bottom_details)
                         findNavController().navigateUp()

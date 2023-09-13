@@ -1,6 +1,8 @@
 package com.example.onlineshop.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.onlineshop.data.User
 import com.example.onlineshop.util.Constants.USER_COLLECTION
 import com.example.onlineshop.util.validatinon.RegisterFailedState
@@ -14,6 +16,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -39,7 +42,9 @@ class RegisterViewModel(
                     }
                 }
                 .addOnFailureListener {
-
+                    viewModelScope.launch{
+                        _register.emit(Resource.Error(it.message.toString()))
+                    }
                 }
         } else {
             val registerFailedState = RegisterFailedState(
@@ -52,15 +57,25 @@ class RegisterViewModel(
         }
     }
 
-    private fun saveUserInfo(userUid: String,user: User) {
-        db.collection(USER_COLLECTION)
-            .document(userUid)
-            .set(user)
-            .addOnSuccessListener {
-                _register.value = Resource.Success(user)
+    fun saveUserInfo(userUid: String,user: User) {
+        val userDocRef = db.collection(USER_COLLECTION).document(userUid)
+
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(userDocRef)
+            if (!snapshot.exists()) {
+                // Документ не існує, тому ми можемо його створити
+                transaction.set(userDocRef, user)
+            } else {
+                Log.d("RegisterViewModel","No created")
             }
-            .addOnFailureListener{
-                _register.value = Resource.Error(it.message.toString())
+        }
+            .addOnSuccessListener {
+                viewModelScope.launch{
+                    _register.emit(Resource.Success(user))
+                }
+            }
+            .addOnFailureListener { exception ->
+                viewModelScope.launch { _register.emit(Resource.Error(exception.message.toString()))  }
             }
     }
 

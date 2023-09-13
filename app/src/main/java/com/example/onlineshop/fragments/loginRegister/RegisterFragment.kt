@@ -67,7 +67,6 @@ class RegisterFragment : Fragment(),KodeinAware {
                         binding.butRegisterRegister.revertAnimation()
                     }
                     is com.example.onlineshop.util.Resource.Error ->{
-                        Log.d(TAG,it.message.toString())
                         binding.butRegisterRegister.revertAnimation()
                     }
                     else -> Unit
