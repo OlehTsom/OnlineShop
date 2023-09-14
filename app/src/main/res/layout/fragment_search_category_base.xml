@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:indeterminateTint="@color/g_gray700"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/rvBestProductsSearchCat"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 

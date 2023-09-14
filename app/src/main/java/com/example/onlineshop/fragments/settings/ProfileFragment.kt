@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.onlineshop.BuildConfig
 import com.example.onlineshop.R
 import com.example.onlineshop.activities.LoginRegisterActivity
 import com.example.onlineshop.databinding.FragmentProfileBinding
@@ -90,6 +91,8 @@ class ProfileFragment : Fragment(),KodeinAware {
         binding.linearSupprot.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_supportFragment)
         }
+
+        binding.tvVersion.text = "Version: " + BuildConfig.VERSION_NAME
 
     }
 

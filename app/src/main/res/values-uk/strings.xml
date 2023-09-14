@@ -102,4 +102,5 @@
     <string name="add_to_cart">В кошик</string>
     <string name="add_to_cart_detail">Додати в кошик</string>
     <string name="your_shopping_cart_is_empty">Ваш кошик порожній</string>
+    <string name="no_orders_to_show">Немає замовлень для показу</string>
 </resources>

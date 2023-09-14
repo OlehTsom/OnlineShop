@@ -20,6 +20,7 @@ import com.example.onlineshop.data.OrderStatus
 import com.example.onlineshop.databinding.FragmentBillingBinding
 import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.helper.customSnackbarForError
+import com.example.onlineshop.helper.hideBottomNavigation
 import com.example.onlineshop.util.Constants.BUNDLE_KEY_ADDRESS
 import com.example.onlineshop.util.HorizontalItemDecoration
 import com.example.onlineshop.util.Resource
@@ -162,7 +163,7 @@ class BillingFragment : Fragment(), KodeinAware {
         }
 
         billingProductAdapter.differ.submitList(products)
-        binding.tvTotalPrice.text = totalPrice.toString()
+        binding.tvTotalPrice.text = requireContext().getString(R.string.dolar) + totalPrice.toString()
 
         binding.imageCloseBilling.setOnClickListener {
             findNavController().navigateUp()
@@ -208,6 +209,11 @@ class BillingFragment : Fragment(), KodeinAware {
             adapter = billingProductAdapter
             addItemDecoration(HorizontalItemDecoration())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNavigation()
     }
 
 }

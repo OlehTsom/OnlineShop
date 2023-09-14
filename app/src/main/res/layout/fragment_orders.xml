@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:text="No orders to show"
+        android:text="@string/no_orders_to_show"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:visibility="gone"

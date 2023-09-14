@@ -12,6 +12,7 @@ import com.example.onlineshop.R
 import com.example.onlineshop.adapters.AllOrdersAdapter
 import com.example.onlineshop.databinding.FragmentOrdersBinding
 import com.example.onlineshop.helper.customSnackbarForError
+import com.example.onlineshop.helper.hideBottomNavigation
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.util.VerticalItemDecoration
 import com.example.onlineshop.viewmodel.AllOrdersViewModel
@@ -80,6 +81,11 @@ class AllOrdersFragment : Fragment(),KodeinAware {
             adapter = allOrdersAdapter
             addItemDecoration(VerticalItemDecoration())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNavigation()
     }
 
 }

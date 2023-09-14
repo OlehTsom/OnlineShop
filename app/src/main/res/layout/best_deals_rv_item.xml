@@ -70,6 +70,7 @@
             android:textColor="@color/white"
             android:textSize="10dp"
             android:textStyle="bold"
+            android:clickable="false"
             app:layout_constraintStart_toEndOf="@id/tv_deal_product_name"
             app:layout_constraintTop_toTopOf="@id/tv_deal_product_name"
             android:textAllCaps="false"

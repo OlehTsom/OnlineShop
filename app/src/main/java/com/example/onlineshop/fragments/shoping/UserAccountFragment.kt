@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.example.onlineshop.databinding.FragmentUserAccountBinding
 import com.example.onlineshop.dialog.setUpBottomSheetDialog
 import com.example.onlineshop.helper.customSnackbarForComplete
 import com.example.onlineshop.helper.customSnackbarForError
+import com.example.onlineshop.helper.hideBottomNavigation
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.viewmodel.UserAccountViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -39,7 +41,9 @@ class UserAccountFragment : Fragment(),KodeinAware {
         super.onCreate(savedInstanceState)
         imageActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             imageUri = it.data?.data
-            Glide.with(this).load(imageUri).into(binding.imageUser)
+            if (imageUri != null) {
+                Glide.with(this).load(imageUri).into(binding.imageUser)
+            }
         }
     }
 
@@ -173,6 +177,11 @@ class UserAccountFragment : Fragment(),KodeinAware {
             imageUser.visibility = View.INVISIBLE
             imageEdit.visibility = View.INVISIBLE
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBottomNavigation()
     }
 
 }
