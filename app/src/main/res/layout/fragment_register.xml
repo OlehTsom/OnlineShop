@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/guidelineRegisterRight"
                 android:drawablePadding="6dp"
                 android:drawableStart="@drawable/ic_kleine_shape"
-                android:text="Kleine."/>
+                android:text="Kwi-kwi"/>
 
             <TextView
                 android:id="@+id/tvLetsRegister"

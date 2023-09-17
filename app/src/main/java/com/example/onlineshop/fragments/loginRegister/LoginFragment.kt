@@ -105,7 +105,6 @@ class LoginFragment : Fragment(), KodeinAware {
         binding.tvForgotPasswordLogin.setOnClickListener {
             setUpBottomSheetDialog { email ->
                 viewModel.resetPassword(email)
-
             }
         }
 

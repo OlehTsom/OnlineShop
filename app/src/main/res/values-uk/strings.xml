@@ -54,7 +54,7 @@
     <string name="best_products">Найкращі товари</string>
     <string name="billing">Оплата і доставка</string>
     <string name="payment_methods">Методи оплати</string>
-    <string name="cannot_use_payments_methods">Keline не підтримує віртуальні платежі. Ви можете оплатити, коли отримаєте замовлення.</string>
+    <string name="cannot_use_payments_methods">Kwi-kwi не підтримує віртуальні платежі. Ви можете оплатити, коли отримаєте замовлення.</string>
     <string name="shipping_address">Адреса доставки</string>
     <string name="total">Всього</string>
     <string name="place_order">Замовити</string>
@@ -103,4 +103,8 @@
     <string name="add_to_cart_detail">Додати в кошик</string>
     <string name="your_shopping_cart_is_empty">Ваш кошик порожній</string>
     <string name="no_orders_to_show">Немає замовлень для показу</string>
+    <string name="internet_connection_error">Помилка підключення до Інтернету</string>
+    <string name="try_again">Спробувати знову</string>
+    <string name="go_out">Вийти</string>
+    <string name="user__not_connected_to_a_network">Користувач наразі не підключений до мережі або немає підключення до Інтернету. Будь ласка спробуйте ще раз.</string>
 </resources>

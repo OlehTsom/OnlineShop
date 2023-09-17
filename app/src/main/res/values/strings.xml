@@ -54,7 +54,7 @@
     <string name="best_products">Best products</string>
     <string name="billing">Billing</string>
     <string name="payment_methods">Payment Methods</string>
-    <string name="cannot_use_payments_methods">Keline dose not support virtual payments. You can pay when you receive your order.</string>
+    <string name="cannot_use_payments_methods">Kwi-kwi dose not support virtual payments. You can pay when you receive your order.</string>
     <string name="shipping_address">Shipping Address</string>
     <string name="total">Total</string>
     <string name="place_order">Place Order</string>
@@ -103,4 +103,8 @@
     <string name="add_to_cart_detail">Add to cart</string>
     <string name="your_shopping_cart_is_empty">Your shopping cart is empty</string>
     <string name="no_orders_to_show">No orders to show</string>
+    <string name="internet_connection_error">Internet connection error</string>
+    <string name="try_again">Try again</string>
+    <string name="go_out">Exit</string>
+    <string name="user__not_connected_to_a_network">User is currently not connected to a network or there is no internet connection available. Please try again.</string>
 </resources>
