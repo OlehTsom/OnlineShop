@@ -84,6 +84,12 @@ open class BaseCategoryFragment : Fragment() {
 
     }
 
+    open fun ifCategoryIsEmpty(){
+        binding.lv.playAnimation()
+        binding.swipeRefreshBaseCategory.visibility = View.INVISIBLE
+        binding.lv.visibility = View.VISIBLE
+    }
+
     fun showProgressOffer(){
         binding.offerProductsProgressBar.visibility = View.VISIBLE
     }

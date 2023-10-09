@@ -4,6 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lv"
+        android:layout_width="340dp"
+        android:layout_height="300dp"
+        android:visibility="gone"
+        app:lottie_speed="1.2"
+        app:lottie_fileName="empty_category.json"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshBaseCategory"
         android:layout_width="match_parent"
@@ -75,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:indeterminateTint="@color/g_gray700"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/rvBestProducts"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 

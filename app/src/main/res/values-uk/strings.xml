@@ -107,4 +107,5 @@
     <string name="try_again">Спробувати знову</string>
     <string name="go_out">Вийти</string>
     <string name="user__not_connected_to_a_network">Користувач наразі не підключений до мережі або немає підключення до Інтернету. Будь ласка спробуйте ще раз.</string>
+    <string name="logo_name">KaRmA</string>
 </resources>

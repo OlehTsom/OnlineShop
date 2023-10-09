@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/guidelineRegisterRight"
                 android:drawablePadding="6dp"
                 android:drawableStart="@drawable/ic_kleine_shape"
-                android:text="Kwi-kwi"/>
+                android:text="@string/logo_name"/>
 
             <TextView
                 android:id="@+id/tvLetsRegister"

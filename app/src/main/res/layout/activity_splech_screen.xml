@@ -34,6 +34,6 @@
         app:layout_constraintBottom_toTopOf="@+id/lv"
         android:drawablePadding="6dp"
         android:drawableStart="@drawable/kleine_shape_big_icon"
-        android:text="Kwi-kwi"/>
+        android:text="@string/logo_name"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

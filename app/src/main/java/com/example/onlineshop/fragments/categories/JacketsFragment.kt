@@ -69,6 +69,9 @@ class JacketsFragment : BaseCategoryFragment(),KodeinAware {
                         showProgressBestProducts()
                     }
                     is Resource.Success ->{
+                        if (it.data.isNullOrEmpty()){
+                            ifCategoryIsEmpty()
+                        }
                         hideProgressBestProducts()
                         bestProductsAdapter .differ.submitList(it.data)
                     }

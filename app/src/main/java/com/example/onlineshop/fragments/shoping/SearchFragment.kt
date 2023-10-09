@@ -90,16 +90,9 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
 
 
                 val searchText = s.toString()
-                searchJob?.cancel() // Відміна попереднього запланованого виклику
 
                 if (isKeyboardActive(requireContext())) {
-                    searchJob = CoroutineScope(Dispatchers.IO).launch {
-                        delay(150)
-                        withContext(Dispatchers.Main) {
                             viewModel.searchProduct(searchText.toLowerCase().capitalize())
-
-                        }
-                    }
                 }
             }
             override fun afterTextChanged(s: Editable?) {}
@@ -181,9 +174,10 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
     }
 
     private fun isKeyboardActive(context: Context): Boolean {
-        val inputMethodManager = getSystemService(context, InputMethodManager::class.java)
-        return inputMethodManager?.isActive ?: false
+        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        return inputMethodManager.isActive
     }
+
 
     private fun toggleTextViewVisibility(visible : Boolean) {
         if (visible) {

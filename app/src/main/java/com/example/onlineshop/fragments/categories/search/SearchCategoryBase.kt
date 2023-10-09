@@ -1,10 +1,12 @@
 package com.example.onlineshop.fragments.categories.search
 
+import android.animation.Animator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -102,13 +104,7 @@ class SearchCategoryBase : Fragment(), KodeinAware {
                     }
 
                     is Resource.Success -> {
-
-                        binding.shimmerVertical.stopShimmer()
-                        binding.shimmerVertical.visibility = View.GONE
-
-                        binding.shimmerHorizontal.stopShimmer()
-                        binding.shimmerHorizontal.visibility = View.GONE
-                        binding.offerProductsProgressBarSearchCat.hideView()
+                        stopShimmer()
                         Log.d("CategorySearchBase", "Ok")
                         offerAdapter.differ.submitList(it.data)
                         setSwipeRefreshLayoutEnabled(false)
@@ -134,6 +130,9 @@ class SearchCategoryBase : Fragment(), KodeinAware {
                     }
 
                     is Resource.Success -> {
+                        if (it.data.isNullOrEmpty()){
+                            ifCategoryEmpty()
+                        }
                         binding.bestProductsProgressBarSearch.hideView()
                         bestProductsAdapter.differ.submitList(it.data)
                     }
@@ -172,8 +171,19 @@ class SearchCategoryBase : Fragment(), KodeinAware {
 
     }
 
+    private fun stopShimmer() {
+        binding.shimmerVertical.stopShimmer()
+        binding.shimmerVertical.visibility = View.GONE
+
+        binding.shimmerHorizontal.stopShimmer()
+        binding.shimmerHorizontal.visibility = View.GONE
+        binding.offerProductsProgressBarSearchCat.hideView()
+    }
+
     private fun ifCategoryEmpty() {
-        TODO("If category empty")
+        binding.lv.playAnimation()
+        binding.swipeRefreshSearchCategory.visibility = View.INVISIBLE
+        binding.lv.visibility = View.VISIBLE
     }
 
     private fun onBestProductsPagingRequest() {
