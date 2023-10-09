@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlineshop.R
 import com.example.onlineshop.adapters.BestProductsAdapter
+import com.example.onlineshop.data.Product
 import com.example.onlineshop.databinding.FragmentSearchCategoryBaseBinding
 import com.example.onlineshop.helper.hideBottomNavigation
 import com.example.onlineshop.util.Constants.BUNDLE_KEY_PRODUCT
@@ -96,24 +97,25 @@ class SearchCategoryBase : Fragment(), KodeinAware {
                 when (it) {
                     is Resource.Loading -> {
                         if (viewModel.pagingInfoOfferProductsForCategory.offerProductPage > 1)
-                            showProgressOffer()
+                            binding.offerProductsProgressBarSearchCat.showView()
                         Log.d("OfferOk", "Loading")
                     }
 
                     is Resource.Success -> {
+
                         binding.shimmerVertical.stopShimmer()
                         binding.shimmerVertical.visibility = View.GONE
 
                         binding.shimmerHorizontal.stopShimmer()
                         binding.shimmerHorizontal.visibility = View.GONE
-                        hideProgressOffer()
+                        binding.offerProductsProgressBarSearchCat.hideView()
                         Log.d("CategorySearchBase", "Ok")
                         offerAdapter.differ.submitList(it.data)
                         setSwipeRefreshLayoutEnabled(false)
                     }
 
                     is Resource.Error -> {
-                        hideProgressOffer()
+                        binding.offerProductsProgressBarSearchCat.hideView()
                         Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
                         setSwipeRefreshLayoutEnabled(false)
@@ -128,16 +130,16 @@ class SearchCategoryBase : Fragment(), KodeinAware {
             viewModel.bestProducts.collectLatest {
                 when (it) {
                     is Resource.Loading -> {
-                        showProgressBestProducts()
+                        binding.bestProductsProgressBarSearch.showView()
                     }
 
                     is Resource.Success -> {
-                        hideProgressBestProducts()
+                        binding.bestProductsProgressBarSearch.hideView()
                         bestProductsAdapter.differ.submitList(it.data)
                     }
 
                     is Resource.Error -> {
-                        hideProgressBestProducts()
+                        binding.bestProductsProgressBarSearch.hideView()
                         Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
                     }
@@ -152,14 +154,14 @@ class SearchCategoryBase : Fragment(), KodeinAware {
                 super.onScrolled(recyclerView, dx, dy)
 
                 if (!recyclerView.canScrollHorizontally(1) && dx != 0) {
-                     onOfferPagingRequest()
+                    onOfferPagingRequest()
                 }
             }
         })
 
         binding.nestedScrollSearchCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { view, _, scrollY, _, _ ->
             if (view.getChildAt(0).bottom <= view.height + scrollY) {
-                  onBestProductsPagingRequest()
+                onBestProductsPagingRequest()
             }
 
         })
@@ -170,15 +172,19 @@ class SearchCategoryBase : Fragment(), KodeinAware {
 
     }
 
-    fun onBestProductsPagingRequest() {
+    private fun ifCategoryEmpty() {
+        TODO("If category empty")
+    }
+
+    private fun onBestProductsPagingRequest() {
         viewModel.fetchBestProducts()
     }
 
-    fun onOfferPagingRequest() {
+    private fun onOfferPagingRequest() {
         viewModel.fetchOfferProducts()
     }
 
-    fun refreshScreen() {
+    private fun refreshScreen() {
         clearPagingDataWhenUpdateScreen(viewModel)
         viewModel.fetchBestProducts()
         viewModel.fetchOfferProducts()
@@ -200,42 +206,31 @@ class SearchCategoryBase : Fragment(), KodeinAware {
         }
     }
 
-    fun clearPagingDataWhenUpdateScreen(viewModel: CategoryViewModel) {
+    private fun clearPagingDataWhenUpdateScreen(viewModel: CategoryViewModel) {
         viewModel.updatePagingInfoOfferProducts(PagingInfoOfferProductsForCategory())
         viewModel.updatePagingInfoBestProducts(PagingInfoBestProductForBaseCategory())
         binding.rvOfferSearchCategory.smoothScrollToPosition(0)
         binding.rvBestProductsSearchCat.smoothScrollToPosition(0)
     }
 
-    fun setSwipeRefreshLayoutEnabled(enabled: Boolean) {
+    private fun setSwipeRefreshLayoutEnabled(enabled: Boolean) {
         binding.swipeRefreshSearchCategory.isRefreshing = enabled
     }
 
-    fun showProgressOffer() {
-        binding.offerProductsProgressBarSearchCat.visibility = View.VISIBLE
+    private fun View.hideView(){
+        visibility = View.GONE
     }
 
-    fun showProgressBestProducts() {
-        binding.bestProductsProgressBarSearch.visibility = View.VISIBLE
+    private fun View.showView(){
+        visibility = View.VISIBLE
     }
-
-    fun hideProgressOffer() {
-        binding.offerProductsProgressBarSearchCat.visibility = View.GONE
-    }
-
-    fun hideProgressBestProducts() {
-        binding.bestProductsProgressBarSearch.visibility = View.GONE
-    }
-
-
-
 
     override fun onResume() {
         super.onResume()
         if (offerAdapter.differ.currentList.isEmpty()) {
-            CoroutineScope(Dispatchers.IO).launch{
+            CoroutineScope(Dispatchers.IO).launch {
                 delay(600)
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     viewModel.fetchBestProducts()
                     viewModel.fetchOfferProducts()
                     viewModel.updatePagingInfoOfferProducts(PagingInfoOfferProductsForCategory())

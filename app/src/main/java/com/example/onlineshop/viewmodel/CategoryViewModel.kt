@@ -28,7 +28,7 @@ class CategoryViewModel(
     val bestProducts = _bestProducts.asStateFlow()
 
     var pagingInfoOfferProductsForCategory = PagingInfoOfferProductsForCategory()
-    var pagingInfoBestProductsForCategory = PagingInfoBestProductForBaseCategory()
+    private var pagingInfoBestProductsForCategory = PagingInfoBestProductForBaseCategory()
 
 
     fun fetchOfferProducts(){
