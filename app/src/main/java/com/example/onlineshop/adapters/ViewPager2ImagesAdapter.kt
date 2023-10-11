@@ -8,15 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.onlineshop.databinding.ViewpagerImageItemBinding
 
-class ViewPager2ImagesAdapter : RecyclerView.Adapter<ViewPager2ImagesAdapter.Viewpager2ImagesHolder>() {
+class ViewPager2ImagesAdapter :
+    RecyclerView.Adapter<ViewPager2ImagesAdapter.Viewpager2ImagesHolder>() {
 
-    inner class Viewpager2ImagesHolder(val binding: ViewpagerImageItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Viewpager2ImagesHolder(val binding: ViewpagerImageItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(image: String) {
             Glide.with(itemView).load(image).into(binding.imageProductsDetails)
         }
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<String>(){
+    private val diffCallback = object : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
@@ -27,12 +29,12 @@ class ViewPager2ImagesAdapter : RecyclerView.Adapter<ViewPager2ImagesAdapter.Vie
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewpager2ImagesHolder {
         return Viewpager2ImagesHolder(
             ViewpagerImageItemBinding.inflate(
-                LayoutInflater.from(parent.context),parent,false
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }

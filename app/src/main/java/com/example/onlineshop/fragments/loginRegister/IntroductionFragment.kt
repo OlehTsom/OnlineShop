@@ -19,17 +19,17 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class IntroductionFragment : Fragment(),KodeinAware {
-    lateinit var binding: FragmentIntroductionBinding
+class IntroductionFragment : Fragment(), KodeinAware {
+    private lateinit var binding: FragmentIntroductionBinding
     override val kodein by kodein()
-    val viewModel : IntroductionViewModel by instance()
+    private val viewModel: IntroductionViewModel by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentIntroductionBinding.inflate(inflater,container,false)
+        binding = FragmentIntroductionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,6 +56,7 @@ class IntroductionFragment : Fragment(),KodeinAware {
                     ACCOUNT_OPTION_FRAGMENT -> {
                         findNavController().navigate(ACCOUNT_OPTION_FRAGMENT)
                     }
+
                     else -> Unit
                 }
             }

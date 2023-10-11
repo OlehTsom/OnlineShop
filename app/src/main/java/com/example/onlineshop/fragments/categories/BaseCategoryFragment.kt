@@ -133,12 +133,6 @@ open class BaseCategoryFragment : Fragment() {
         binding.swipeRefreshBaseCategory.isRefreshing = enabled
     }
 
-    protected fun resumeFragment(viewModel: CategoryViewModel) {
-        // Логіка ініціалізації та завантаження даних
-        viewModel.fetchBestProducts()
-        viewModel.fetchOfferProducts()
-    }
-
     override fun onResume() {
         super.onResume()
         showBottomNavigation()

@@ -25,18 +25,15 @@ import org.kodein.di.android.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class ShoppingActivity : AppCompatActivity(),BottomNavigationListener,KodeinAware {
+class ShoppingActivity : AppCompatActivity(), BottomNavigationListener, KodeinAware {
+    override val kodein by kodein()
     val binding by lazy {
         ActivityShopingBinding.inflate(layoutInflater)
     }
-
     private lateinit var connectivityObserver: NetworkConnectivityObserver
-
-
-    override val kodein by kodein()
-    private val viewModel : CardViewModel by instance()
-
+    private val viewModel: CardViewModel by instance()
     val navController by lazy { findNavController(R.id.shoppingNavHost) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_OnlineShop)
@@ -47,15 +44,17 @@ class ShoppingActivity : AppCompatActivity(),BottomNavigationListener,KodeinAwar
 
         lifecycleScope.launchWhenStarted {
             viewModel.cartProducts.collectLatest {
-                when(it){
-                    is Resource.Success ->{
+                when (it) {
+                    is Resource.Success -> {
                         val amount = it.data?.size ?: 0
-                        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+                        val bottomNavigation =
+                            findViewById<BottomNavigationView>(R.id.bottom_navigation)
                         bottomNavigation.getOrCreateBadge(R.id.cardFragment).apply {
                             number = amount
                             backgroundColor = resources.getColor(R.color.g_blue)
                         }
                     }
+
                     else -> Unit
                 }
             }
@@ -63,23 +62,28 @@ class ShoppingActivity : AppCompatActivity(),BottomNavigationListener,KodeinAwar
 
 
         connectivityObserver.observe().onEach {
-            when(it){
-                ConnectivityObserver.Status.Lost->{
+            when (it) {
+                ConnectivityObserver.Status.Lost -> {
                     if (isConnected) isConnected = false
                     setUpBottomSheetDialogLoseConnection()
                 }
-                ConnectivityObserver.Status.Available ->{
+
+                ConnectivityObserver.Status.Available -> {
                     if (!isConnected) isConnected = true
                 }
-                ConnectivityObserver.Status.NegativeConnection ->{
+
+                ConnectivityObserver.Status.NegativeConnection -> {
                     if (isConnected) isConnected = false
                 }
-                ConnectivityObserver.Status.PositiveConnection ->{
+
+                ConnectivityObserver.Status.PositiveConnection -> {
                     if (!isConnected) isConnected = true
                 }
-                ConnectivityObserver.Status.Unavailable ->{
+
+                ConnectivityObserver.Status.Unavailable -> {
                     if (isConnected) isConnected = false
                 }
+
                 else -> Unit
             }
         }.launchIn(lifecycleScope)

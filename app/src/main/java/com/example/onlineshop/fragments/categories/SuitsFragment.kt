@@ -23,13 +23,12 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class SuitsFragment : BaseCategoryFragment(),KodeinAware {
-
+class SuitsFragment : BaseCategoryFragment(), KodeinAware {
     override val kodein by kodein()
-    val firestore : FirebaseFirestore by instance()
+    private val firestore: FirebaseFirestore by instance()
 
-    val viewModel by viewModels<CategoryViewModel> {
-        VMBaseCategoryProviderFactory(firestore,Category.Suits.category)
+    private val viewModel by viewModels<CategoryViewModel> {
+        VMBaseCategoryProviderFactory(firestore, Category.Suits.category)
     }
 
 
@@ -38,23 +37,26 @@ class SuitsFragment : BaseCategoryFragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.offerProducts.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         if (viewModel.pagingInfoOfferProductsForCategory.offerProductPage > 1)
                             showProgressOffer()
-                        Log.d("OfferOk","Loading")
+                        Log.d("OfferOk", "Loading")
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         hideProgressOffer()
                         offerAdapter.differ.submitList(it.data)
                         setSwipeRefreshLayoutEnabled(false)
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         hideProgressOffer()
-                        Snackbar.make(requireView(),it.message.toString(),Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
                         setSwipeRefreshLayoutEnabled(false)
                     }
+
                     else -> Unit
                 }
             }
@@ -62,22 +64,25 @@ class SuitsFragment : BaseCategoryFragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.bestProducts.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         showProgressBestProducts()
                     }
-                    is Resource.Success ->{
-                        if (it.data.isNullOrEmpty()){
+
+                    is Resource.Success -> {
+                        if (it.data.isNullOrEmpty()) {
                             ifCategoryIsEmpty()
                         }
                         hideProgressBestProducts()
-                        bestProductsAdapter .differ.submitList(it.data)
+                        bestProductsAdapter.differ.submitList(it.data)
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         hideProgressBestProducts()
-                        Snackbar.make(requireView(),it.message.toString(),Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
                     }
+
                     else -> Unit
                 }
             }

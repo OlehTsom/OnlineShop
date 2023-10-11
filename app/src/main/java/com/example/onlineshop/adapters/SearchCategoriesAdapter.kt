@@ -11,9 +11,11 @@ import com.example.onlineshop.data.Product
 import com.example.onlineshop.data.SearchCategory
 import com.example.onlineshop.databinding.SearchCategriesItemRvBinding
 
-class SearchCategoriesAdapter : RecyclerView.Adapter<SearchCategoriesAdapter.CategoriesViewHolder>() {
+class SearchCategoriesAdapter :
+    RecyclerView.Adapter<SearchCategoriesAdapter.CategoriesViewHolder>() {
 
-    inner class CategoriesViewHolder(private val binding: SearchCategriesItemRvBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CategoriesViewHolder(private val binding: SearchCategriesItemRvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(category: SearchCategory) {
             binding.tvNameCategories.text = category.nameCategory
             Glide.with(itemView).load(category.image).into(binding.imgProductCategoriesSearch)
@@ -21,7 +23,7 @@ class SearchCategoriesAdapter : RecyclerView.Adapter<SearchCategoriesAdapter.Cat
 
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<SearchCategory>(){
+    private val diffCallback = object : DiffUtil.ItemCallback<SearchCategory>() {
         override fun areItemsTheSame(oldItem: SearchCategory, newItem: SearchCategory): Boolean {
             return oldItem.id == newItem.id
         }
@@ -32,7 +34,7 @@ class SearchCategoriesAdapter : RecyclerView.Adapter<SearchCategoriesAdapter.Cat
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
@@ -59,5 +61,5 @@ class SearchCategoriesAdapter : RecyclerView.Adapter<SearchCategoriesAdapter.Cat
         }
     }
 
-    var onClick : ((SearchCategory) -> Unit) ?= null
+    var onClick: ((SearchCategory) -> Unit)? = null
 }

@@ -11,16 +11,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.onlineshop.R
 import com.example.onlineshop.databinding.FragmentAccountOptionsBinding
 
-class AccountOptionsFragment: Fragment() {
-    lateinit var binding: FragmentAccountOptionsBinding
-
+class AccountOptionsFragment : Fragment() {
+    private lateinit var binding: FragmentAccountOptionsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAccountOptionsBinding.inflate(inflater,container,false)
+        binding = FragmentAccountOptionsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

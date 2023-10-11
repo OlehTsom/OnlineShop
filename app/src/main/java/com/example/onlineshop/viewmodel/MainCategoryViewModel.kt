@@ -31,8 +31,6 @@ class MainCategoryViewModel(
     private var pagingInfoBestDeals = PagingInfoBestDeals()
     private var pagingInfoSpecialProducts = PagingInfoSpecialProducts()
 
-    private var categoriesLoaded = false
-
     init {
         fetchSpecialProducts()
         fetchBestDealsProducts()
@@ -135,10 +133,6 @@ class MainCategoryViewModel(
         pagingInfoSpecialProducts = newPagingInfo
     }
 
-    fun getPagingInfoBestProducts(): PagingInfoBestProducts {
-        return pagingInfoBestProducts
-    }
-
     fun getPagingInfoBestDeals(): PagingInfoBestDeals {
         return pagingInfoBestDeals
     }
@@ -146,15 +140,6 @@ class MainCategoryViewModel(
     fun getPagingInfoSpecialProducts(): PagingInfoSpecialProducts {
         return pagingInfoSpecialProducts
     }
-
-    fun clearData() {
-        _specialProducts.value = Resource.Unspecified()
-        _bestDealsProducts.value = Resource.Unspecified()
-        _bestProducts.value = Resource.Unspecified()
-
-        // Скидання інших полів і станів
-    }
-
 
 }
 

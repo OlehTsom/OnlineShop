@@ -32,7 +32,6 @@ class DetailsViewModel(
     val amountCheck = _amountCheck.asSharedFlow()
 
 
-
     fun addUpdateProductInCart(cartProduct: CartProduct) {
         viewModelScope.launch {
             _addToCart.emit(Resource.Loading())

@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment() {
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
     private var bottomNavigationListener: BottomNavigationListener? = null
 
     override fun onCreateView(
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,7 +43,6 @@ class HomeFragment : Fragment() {
             throw RuntimeException("$context must implement BottomNavigationListener")
         }
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,11 +62,12 @@ class HomeFragment : Fragment() {
             bottomNavigationListener?.onBottomNavigationSelected(R.id.searchFragment)
         }
 
-        val viewPager2Adapter = HomeViewpagerAdapter(categoriesFragment,childFragmentManager,lifecycle)
+        val viewPager2Adapter =
+            HomeViewpagerAdapter(categoriesFragment, childFragmentManager, lifecycle)
         binding.viewPagerHome.adapter = viewPager2Adapter
         binding.viewPagerHome.isUserInputEnabled = false
-        TabLayoutMediator(binding.tabLayout,binding.viewPagerHome){tab, position ->
-            when(position){
+        TabLayoutMediator(binding.tabLayout, binding.viewPagerHome) { tab, position ->
+            when (position) {
                 0 -> tab.text = getString(R.string.main_viewpager_name_fragment)
                 1 -> tab.text = getString(R.string.zweite_viewpager_name_fragment)
                 2 -> tab.text = getString(R.string.dritte_viewpager_name_fragment)

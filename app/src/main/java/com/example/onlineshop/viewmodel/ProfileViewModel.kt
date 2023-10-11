@@ -41,7 +41,6 @@ class ProfileViewModel(
                     }
                 }
             }
-
     }
 
     fun logOut(){

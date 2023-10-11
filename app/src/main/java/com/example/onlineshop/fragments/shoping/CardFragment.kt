@@ -206,12 +206,15 @@ class CardFragment : Fragment(), KodeinAware {
         return alertDialog
     }
 
-    private fun createItemTouchHelper() : ItemTouchHelper.Callback{
+    private fun createItemTouchHelper(): ItemTouchHelper.Callback {
         val onItemTouchHelper = object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
-            ): Int = makeMovementFlags(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.START or ItemTouchHelper.END)
+            ): Int = makeMovementFlags(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                ItemTouchHelper.START or ItemTouchHelper.END
+            )
 
             override fun onMove(
                 recyclerView: RecyclerView,

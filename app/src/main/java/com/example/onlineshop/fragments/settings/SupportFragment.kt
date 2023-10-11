@@ -10,7 +10,7 @@ import com.example.onlineshop.R
 import com.example.onlineshop.databinding.FragmentSupportBinding
 import com.example.onlineshop.helper.hideBottomNavigation
 
-class SupportFragment : Fragment(){
+class SupportFragment : Fragment() {
     private lateinit var binding: FragmentSupportBinding
 
     override fun onCreateView(
@@ -18,7 +18,7 @@ class SupportFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSupportBinding.inflate(layoutInflater,container,false)
+        binding = FragmentSupportBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

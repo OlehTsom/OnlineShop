@@ -34,21 +34,25 @@ import org.kodein.di.generic.instance
 class BillingFragment : Fragment(), KodeinAware {
     //ui
     private lateinit var binding: FragmentBillingBinding
+
     //adapters
     private val addressAdapters by lazy { AddressAdapter() }
     private val billingProductAdapter by lazy { BillingProductsAdapter() }
+
     //arguments
     private val args by navArgs<BillingFragmentArgs>()
+
     //data
     private var products = emptyList<CartProduct>()
     private var totalPrice = 0f
-    private var selectedAddress : Address ?= null
+    private var selectedAddress: Address? = null
+
     //kodein
     override val kodein by kodein()
+
     //viewModels
     private val viewModel: BillingViewModel by instance()
-    private val orderViewModel : OrderViewModel by instance()
-
+    private val orderViewModel: OrderViewModel by instance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +79,7 @@ class BillingFragment : Fragment(), KodeinAware {
         setUpAddressProductsAdapter()
 
 
-        if (!args.payment){
+        if (!args.payment) {
             binding.rvProducts.visibility = View.INVISIBLE
             binding.bottomLine.visibility = View.INVISIBLE
             binding.totalBoxContainer.visibility = View.INVISIBLE
@@ -163,7 +167,8 @@ class BillingFragment : Fragment(), KodeinAware {
         }
 
         billingProductAdapter.differ.submitList(products)
-        binding.tvTotalPrice.text = requireContext().getString(R.string.dolar) + totalPrice.toString()
+        binding.tvTotalPrice.text =
+            requireContext().getString(R.string.dolar) + totalPrice.toString()
 
         binding.imageCloseBilling.setOnClickListener {
             findNavController().navigateUp()
@@ -171,14 +176,14 @@ class BillingFragment : Fragment(), KodeinAware {
 
     }
 
-    private fun showOrderConfirmationDialog(){
+    private fun showOrderConfirmationDialog() {
         val alertDialog = AlertDialog.Builder(requireContext()).apply {
             setTitle(getString(R.string.orders_items))
             setMessage(getString(R.string.do_you_want_to_order_you_cart_items))
-            setNegativeButton(getString(R.string.delete_alert_dialog_text_negativ_button)){ dialog, _ ->
+            setNegativeButton(getString(R.string.delete_alert_dialog_text_negativ_button)) { dialog, _ ->
                 dialog.dismiss()
             }
-            setPositiveButton(getString(R.string.delete_alert_dialog_text_positiv_button)){ dialog, _ ->
+            setPositiveButton(getString(R.string.delete_alert_dialog_text_positiv_button)) { dialog, _ ->
                 val order = Order(
                     OrderStatus.Ordered.status,
                     totalPrice.toString(),

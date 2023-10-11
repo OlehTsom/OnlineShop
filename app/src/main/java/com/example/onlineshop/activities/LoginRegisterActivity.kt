@@ -17,12 +17,9 @@ class LoginRegisterActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
         val navController = navHostFragment?.findNavController()
 
-        // Отримайте поточний фрагмент через NavController
         val currentFragment = navController?.currentDestination
 
         if (currentFragment?.id == R.id.accountOptionsFragment) {
-            // Ви знаходитесь в фрагменті AccountOptionsFragment,
-            // тут ви можете викликати finish() або іншу логіку виходу з додатку.
             finish()
         } else {
             super.onBackPressed()

@@ -17,7 +17,7 @@ import com.example.onlineshop.databinding.FragmentOrderDetailBinding
 import com.example.onlineshop.util.VerticalItemDecoration
 
 class OrderDetailFragment : Fragment() {
-    private lateinit var binding : FragmentOrderDetailBinding
+    private lateinit var binding: FragmentOrderDetailBinding
     private val productsAdapter by lazy { BillingProductsAdapter() }
     private val args by navArgs<OrderDetailFragmentArgs>()
 
@@ -26,7 +26,7 @@ class OrderDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOrderDetailBinding.inflate(inflater,container,false)
+        binding = FragmentOrderDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -52,7 +52,7 @@ class OrderDetailFragment : Fragment() {
             )
         )
 
-        val currentOrderStatus = when(getOrderStatus(order.orderStatus)){
+        val currentOrderStatus = when (getOrderStatus(order.orderStatus)) {
             is OrderStatus.Ordered -> 0
             is OrderStatus.Confirmed -> 1
             is OrderStatus.Shipped -> 2
@@ -60,8 +60,8 @@ class OrderDetailFragment : Fragment() {
             else -> 3
         }
 
-        binding.stepView.go(currentOrderStatus,false)
-        if (currentOrderStatus == 3){
+        binding.stepView.go(currentOrderStatus, false)
+        if (currentOrderStatus == 3) {
             binding.stepView.done(true)
         }
 
@@ -86,7 +86,8 @@ class OrderDetailFragment : Fragment() {
 
     private fun setupProductsAdapter() {
         binding.rvProducts.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = productsAdapter
             addItemDecoration(VerticalItemDecoration())
         }

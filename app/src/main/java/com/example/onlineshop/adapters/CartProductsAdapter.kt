@@ -77,10 +77,6 @@ class  CartProductsAdapter : RecyclerView.Adapter<CartProductsAdapter.CardProduc
         }
     }
 
-    fun updateList(newList: List<CartProduct>) {
-        differ.submitList(newList)
-    }
-
     var onProductClick : ((CartProduct) -> Unit) ?= null
     var onMinesClick : ((CartProduct) -> Unit) ?= null
     var onPlusClick : ((CartProduct) -> Unit) ?= null

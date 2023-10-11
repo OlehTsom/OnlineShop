@@ -29,22 +29,23 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class UserAccountFragment : Fragment(),KodeinAware {
-    private lateinit var binding : FragmentUserAccountBinding
-    private lateinit var  imageActivityResultLauncher : ActivityResultLauncher<Intent>
-    private var imageUri : Uri ?= null
+class UserAccountFragment : Fragment(), KodeinAware {
+    private lateinit var binding: FragmentUserAccountBinding
+    private lateinit var imageActivityResultLauncher: ActivityResultLauncher<Intent>
+    private var imageUri: Uri? = null
 
     override val kodein by kodein()
-    private val viewModel : UserAccountViewModel by instance()
+    private val viewModel: UserAccountViewModel by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        imageActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            imageUri = it.data?.data
-            if (imageUri != null) {
-                Glide.with(this).load(imageUri).into(binding.imageUser)
+        imageActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                imageUri = it.data?.data
+                if (imageUri != null) {
+                    Glide.with(this).load(imageUri).into(binding.imageUser)
+                }
             }
-        }
     }
 
     override fun onCreateView(
@@ -52,7 +53,7 @@ class UserAccountFragment : Fragment(),KodeinAware {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentUserAccountBinding.inflate(layoutInflater,container,false)
+        binding = FragmentUserAccountBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -61,18 +62,24 @@ class UserAccountFragment : Fragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.user.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         showUserLoading()
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         hideUserLoading()
                         showUserInformation(it.data!!)
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         hideUserLoading()
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_details)
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
+
                     else -> Unit
                 }
             }
@@ -80,18 +87,24 @@ class UserAccountFragment : Fragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.updateInfo.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         binding.buttonSave.startAnimation()
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.buttonSave.revertAnimation()
                         findNavController().navigateUp()
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         binding.buttonSave.revertAnimation()
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_details)
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
+
                     else -> Unit
                 }
             }
@@ -99,17 +112,25 @@ class UserAccountFragment : Fragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.resetPassword.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
 
                     }
-                    is Resource.Success ->{
-                        customSnackbarForComplete(getString(R.string.snacbar_reset_text_login_fragment),
-                            R.dimen.snackbar_margin_bottom_details)
+
+                    is Resource.Success -> {
+                        customSnackbarForComplete(
+                            getString(R.string.snacbar_reset_text_login_fragment),
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
-                    is Resource.Error ->{
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_details)
+
+                    is Resource.Error -> {
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
+
                     else -> Unit
                 }
             }
@@ -121,18 +142,18 @@ class UserAccountFragment : Fragment(),KodeinAware {
                 val lastName = edLastName.text.toString().trim()
                 val email = edEmail.text.toString().trim()
                 val user = User(firstName, lastName, email)
-                viewModel.updateUserInfo(user,imageUri)
+                viewModel.updateUserInfo(user, imageUri)
             }
         }
 
-        binding.imageEdit.setOnClickListener{
+        binding.imageEdit.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             imageActivityResultLauncher.launch(intent)
         }
 
         binding.tvUpdatePassword.setOnClickListener {
-            setUpBottomSheetDialog {email ->
+            setUpBottomSheetDialog { email ->
                 viewModel.resetUserPassword(it.toString().trim())
             }
         }
@@ -146,7 +167,8 @@ class UserAccountFragment : Fragment(),KodeinAware {
 
     private fun showUserInformation(data: User) {
         binding.apply {
-            Glide.with(this@UserAccountFragment).load(data.imagePath).error(ColorDrawable(Color.BLACK)).into(imageUser)
+            Glide.with(this@UserAccountFragment).load(data.imagePath)
+                .error(ColorDrawable(Color.BLACK)).into(imageUser)
             edFirstName.setText(data.firstName)
             edLastName.setText(data.lastName)
             edEmail.setText(data.email)

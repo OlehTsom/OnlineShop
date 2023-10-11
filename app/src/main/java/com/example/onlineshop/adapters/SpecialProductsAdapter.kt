@@ -11,18 +11,20 @@ import com.example.onlineshop.R
 import com.example.onlineshop.data.Product
 import com.example.onlineshop.databinding.SpecialRvItemBinding
 
-class SpecialProductsAdapter : RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
+class SpecialProductsAdapter :
+    RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
 
-    inner class SpecialProductsViewHolder(private val binding : SpecialRvItemBinding)
-        : RecyclerView.ViewHolder(binding.root){
-            fun bind(product: Product){
-                binding.tvSpecialProductName.text = product.name
-                binding.tvSpecialPrdouctPrice.text = itemView.context.getString(R.string.dolar) + product.price
-                Glide.with(itemView).load(product.images[0]).into(binding.imageSpecialRvItem)
-            }
+    inner class SpecialProductsViewHolder(private val binding: SpecialRvItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(product: Product) {
+            binding.tvSpecialProductName.text = product.name
+            binding.tvSpecialPrdouctPrice.text =
+                itemView.context.getString(R.string.dolar) + product.price
+            Glide.with(itemView).load(product.images[0]).into(binding.imageSpecialRvItem)
         }
+    }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Product>(){
+    private val diffCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
         }
@@ -33,10 +35,11 @@ class SpecialProductsAdapter : RecyclerView.Adapter<SpecialProductsAdapter.Speci
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialProductsViewHolder {
-        val binding = SpecialRvItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            SpecialRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SpecialProductsViewHolder(binding)
     }
 
@@ -53,5 +56,5 @@ class SpecialProductsAdapter : RecyclerView.Adapter<SpecialProductsAdapter.Speci
         }
     }
 
-    var onClick : ((Product) -> Unit) ?= null
+    var onClick: ((Product) -> Unit)? = null
 }

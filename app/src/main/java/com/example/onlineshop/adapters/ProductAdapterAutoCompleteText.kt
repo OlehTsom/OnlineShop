@@ -32,23 +32,22 @@ class ProductAdapterAutoCompleteText(
 
         val binding = BestDealsRvItemBinding.inflate(LayoutInflater.from(context), parent, false)
 
-        // Використовуємо binding замість пошуку віджетів
         Glide.with(context).load(product.images[0]).into(binding.imgBestDeal)
         binding.tvDealProductName.text = product.name
 
 
-        if(product.offerPercentage == null || product.offerPercentage == 0f) {
+        if (product.offerPercentage == null || product.offerPercentage == 0f) {
             binding.tvOldPrice.text = context.getString(R.string.dolar) + product.price
             binding.tvOldPrice.paintFlags = 0
             binding.tvNewPrice.visibility = View.GONE
-        }else{
+        } else {
             binding.tvOldPrice.text = context.getString(R.string.dolar) + product.price
             binding.tvOldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            binding.tvNewPrice.text = context.getString(R.string.dolar) + product.offerPercentage.getProductPrice(product.price)
+            binding.tvNewPrice.text =
+                context.getString(R.string.dolar) + product.offerPercentage.getProductPrice(product.price)
 
         }
 
-        // Додайте обробник кліка для itemView
         binding.root.setOnClickListener {
             clickListener.onProductClick(product)
         }

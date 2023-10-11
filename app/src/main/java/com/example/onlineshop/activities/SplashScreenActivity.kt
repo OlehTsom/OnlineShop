@@ -1,22 +1,17 @@
 package com.example.onlineshop.activities
 
 import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.view.ViewTreeObserver
-import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
-import android.widget.TextView
 import com.example.onlineshop.R
 import com.example.onlineshop.databinding.ActivitySplechScreenBinding
 
-class SpleshScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplechScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +59,7 @@ class SpleshScreenActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextLayout(){
-        val intent = Intent(this@SpleshScreenActivity, LoginRegisterActivity::class.java)
+        val intent = Intent(this@SplashScreenActivity, LoginRegisterActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         overridePendingTransition(R.anim.from_righ, R.anim.to_left)

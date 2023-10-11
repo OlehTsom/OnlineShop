@@ -24,17 +24,17 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 class MessageSupportFragment : Fragment(), KodeinAware {
-    private lateinit var binding : FragmentSupportMessageBinding
+    private lateinit var binding: FragmentSupportMessageBinding
 
     override val kodein by kodein()
-    private val viewModel : SupportViewModel by instance()
+    private val viewModel: SupportViewModel by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSupportMessageBinding.inflate(layoutInflater,container,false)
+        binding = FragmentSupportMessageBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -47,20 +47,24 @@ class MessageSupportFragment : Fragment(), KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.sendMessageState.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         binding.buttonSend.startAnimation()
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.buttonSend.revertAnimation()
                         customSnackbarForComplete(
                             getString(R.string.wait_for_a_reply),
-                            R.dimen.snackbar_margin_bottom_details)
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                         findNavController().navigateUp()
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         binding.buttonSend.revertAnimation()
                     }
+
                     else -> Unit
                 }
             }
@@ -87,7 +91,7 @@ class MessageSupportFragment : Fragment(), KodeinAware {
 
     }
 
-    private suspend fun messageValidation(messageValFailedState: MessageValidationFailedState){
+    private suspend fun messageValidation(messageValFailedState: MessageValidationFailedState) {
         var isValidateOk = true
         val fieldsToValidate = mapOf(
             binding.edFirstName to messageValFailedState.name,
@@ -95,9 +99,9 @@ class MessageSupportFragment : Fragment(), KodeinAware {
             binding.edMessage to messageValFailedState.message
         )
 
-        withContext(Dispatchers.Main){
-            fieldsToValidate.forEach{(view,validationResult) ->
-                if (validationResult is MessageValidation.Failed){
+        withContext(Dispatchers.Main) {
+            fieldsToValidate.forEach { (view, validationResult) ->
+                if (validationResult is MessageValidation.Failed) {
                     isValidateOk = false
                     view.apply {
                         requestFocus()

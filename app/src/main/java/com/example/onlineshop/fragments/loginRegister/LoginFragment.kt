@@ -36,7 +36,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
 class LoginFragment : Fragment(), KodeinAware {
-    lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentLoginBinding
     override val kodein by kodein()
     private val viewModel: LoginViewModel by instance()
     private val viewModelRegister: RegisterViewModel by instance()

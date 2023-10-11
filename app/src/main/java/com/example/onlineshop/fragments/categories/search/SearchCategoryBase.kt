@@ -42,11 +42,11 @@ import org.kodein.di.generic.instance
 class SearchCategoryBase : Fragment(), KodeinAware {
     lateinit var binding: FragmentSearchCategoryBaseBinding
     private val args by navArgs<SearchCategoryBaseArgs>()
-    val offerAdapter: BestProductsAdapter by lazy { BestProductsAdapter() }
-    val bestProductsAdapter: BestProductsAdapter by lazy { BestProductsAdapter() }
+    private val offerAdapter: BestProductsAdapter by lazy { BestProductsAdapter() }
+    private val bestProductsAdapter: BestProductsAdapter by lazy { BestProductsAdapter() }
 
     override val kodein by kodein()
-    val firestore: FirebaseFirestore by instance()
+    private val firestore: FirebaseFirestore by instance()
 
     val viewModel by viewModels<CategoryViewModel> {
         VMBaseCategoryProviderFactory(firestore, args.category.category)
@@ -130,7 +130,7 @@ class SearchCategoryBase : Fragment(), KodeinAware {
                     }
 
                     is Resource.Success -> {
-                        if (it.data.isNullOrEmpty()){
+                        if (it.data.isNullOrEmpty()) {
                             ifCategoryEmpty()
                         }
                         binding.bestProductsProgressBarSearch.hideView()
@@ -227,11 +227,11 @@ class SearchCategoryBase : Fragment(), KodeinAware {
         binding.swipeRefreshSearchCategory.isRefreshing = enabled
     }
 
-    private fun View.hideView(){
+    private fun View.hideView() {
         visibility = View.GONE
     }
 
-    private fun View.showView(){
+    private fun View.showView() {
         visibility = View.VISIBLE
     }
 

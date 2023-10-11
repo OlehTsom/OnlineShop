@@ -24,29 +24,34 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
 class AddressFragment : Fragment(), KodeinAware {
-
     override val kodein by kodein()
     private lateinit var binding: FragmentAddressBinding
-    private val viewModel : AddressViewModel by instance()
-    val args by navArgs<AddressFragmentArgs>()
+    private val viewModel: AddressViewModel by instance()
+    private val args by navArgs<AddressFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launchWhenStarted {
-            viewModel.addNewAddress.collect{
-                when(it){
-                    is Resource.Loading ->{
+            viewModel.addNewAddress.collect {
+                when (it) {
+                    is Resource.Loading -> {
                         binding.progressbarAddress.visibility = View.VISIBLE
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
                     }
-                    is Resource.Error ->{
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_card)
+
+                    is Resource.Error -> {
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_card
+                        )
                         binding.progressbarAddress.visibility = View.INVISIBLE
                     }
+
                     else -> Unit
                 }
             }
@@ -64,7 +69,7 @@ class AddressFragment : Fragment(), KodeinAware {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddressBinding.inflate(layoutInflater,container,false)
+        binding = FragmentAddressBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -74,9 +79,9 @@ class AddressFragment : Fragment(), KodeinAware {
 
         val address = args.address
 
-        if (address == null){
+        if (address == null) {
             binding.buttonDelelte.visibility = View.GONE
-        }else{
+        } else {
             binding.apply {
                 edAddressTitle.setText(address.addressTitle)
                 edFullName.setText(address.fullName)
@@ -89,22 +94,29 @@ class AddressFragment : Fragment(), KodeinAware {
 
 
         lifecycleScope.launchWhenStarted {
-            viewModel.updateAddressDate.collect{
-                when(it){
-                    is Resource.Loading ->{
+            viewModel.updateAddressDate.collect {
+                when (it) {
+                    is Resource.Loading -> {
                         binding.progressbarAddress.visibility = View.VISIBLE
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
                         customSnackbarForComplete(
                             getString(R.string.address_updated_successfully),
-                            R.dimen.snackbar_margin_bottom_details)
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
-                    is Resource.Error ->{
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_card)
+
+                    is Resource.Error -> {
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_card
+                        )
                         binding.progressbarAddress.visibility = View.INVISIBLE
                     }
+
                     else -> Unit
                 }
             }
@@ -123,29 +135,36 @@ class AddressFragment : Fragment(), KodeinAware {
 
                 if (args.address == null) {
                     viewModel.addAddressToAccount(address)
-                }else{
-                    viewModel.updateAddressDate(args.address!!,address)
+                } else {
+                    viewModel.updateAddressDate(args.address!!, address)
                 }
             }
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.deleteAddressResult.collect{
-                when(it){
-                    is Resource.Loading ->{
+            viewModel.deleteAddressResult.collect {
+                when (it) {
+                    is Resource.Loading -> {
                         binding.progressbarAddress.visibility = View.VISIBLE
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.progressbarAddress.visibility = View.INVISIBLE
                         findNavController().navigateUp()
                         customSnackbarForComplete(
                             getString(R.string.address_deleted_successfully),
-                            R.dimen.snackbar_margin_bottom_details)
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
-                    is Resource.Error ->{
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_card)
+
+                    is Resource.Error -> {
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_card
+                        )
                         binding.progressbarAddress.visibility = View.INVISIBLE
                     }
+
                     else -> Unit
                 }
             }

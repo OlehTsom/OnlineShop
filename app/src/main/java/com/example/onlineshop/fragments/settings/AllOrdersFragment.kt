@@ -21,19 +21,19 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class AllOrdersFragment : Fragment(),KodeinAware {
-    private lateinit var binding : FragmentOrdersBinding
+class AllOrdersFragment : Fragment(), KodeinAware {
+    private lateinit var binding: FragmentOrdersBinding
     private val allOrdersAdapter by lazy { AllOrdersAdapter() }
 
     override val kodein by kodein()
-    private val viewModel : AllOrdersViewModel by instance()
+    private val viewModel: AllOrdersViewModel by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOrdersBinding.inflate(layoutInflater,container,false)
+        binding = FragmentOrdersBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -44,21 +44,27 @@ class AllOrdersFragment : Fragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.allOrders.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         binding.progressbarAllOrders.visibility = View.VISIBLE
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.progressbarAllOrders.visibility = View.GONE
                         allOrdersAdapter.differ.submitList(it.data)
-                        if (it.data.isNullOrEmpty()){
+                        if (it.data.isNullOrEmpty()) {
                             binding.tvEmptyOrders.visibility = View.VISIBLE
                         }
                     }
-                    is Resource.Error ->{
-                        customSnackbarForError(it.message.toString(), R.dimen.snackbar_margin_bottom_details)
+
+                    is Resource.Error -> {
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                         binding.progressbarAllOrders.visibility = View.GONE
                     }
+
                     else -> Unit
                 }
             }
@@ -77,7 +83,8 @@ class AllOrdersFragment : Fragment(),KodeinAware {
 
     private fun setUpOrdersAdapter() {
         binding.rvAllOrders.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = allOrdersAdapter
             addItemDecoration(VerticalItemDecoration())
         }

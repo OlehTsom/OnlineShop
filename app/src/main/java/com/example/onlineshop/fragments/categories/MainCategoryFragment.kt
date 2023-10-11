@@ -19,6 +19,7 @@ import com.example.onlineshop.adapters.BestProductsAdapter
 import com.example.onlineshop.adapters.SpecialProductsAdapter
 import com.example.onlineshop.databinding.FragmentMainCategoryBinding
 import com.example.onlineshop.helper.showBottomNavigation
+import com.example.onlineshop.util.Constants.BUNDLE_KEY_PRODUCT
 import com.example.onlineshop.util.Resource
 import com.example.onlineshop.viewmodel.MainCategoryViewModel
 import com.example.onlineshop.viewmodel.PagingInfoBestDeals
@@ -30,22 +31,23 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
 private val TAG = "MainCategoryFragment"
+
 class MainCategoryFragment : Fragment(), KodeinAware {
-    private lateinit var binding : FragmentMainCategoryBinding
+    private lateinit var binding: FragmentMainCategoryBinding
     private lateinit var specialProductsAdapter: SpecialProductsAdapter
     private lateinit var bestDealsProductsAdapter: BestDealsProductsAdapter
     private lateinit var bestProductsAdapter: BestProductsAdapter
     override val kodein by kodein()
 
-    private val viewModel : MainCategoryViewModel by instance()
+    private val viewModel: MainCategoryViewModel by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("SearchFragment","In InCreateView")
-        binding = FragmentMainCategoryBinding.inflate(inflater,container,false)
+        Log.d("SearchFragment", "In InCreateView")
+        binding = FragmentMainCategoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,111 +58,120 @@ class MainCategoryFragment : Fragment(), KodeinAware {
         setUpBestDealsProductRv()
         setUpBestProductRv()
 
-        specialProductsAdapter.onClick = {product ->
-            val bundle = Bundle().apply { putParcelable("product",product)}
-            findNavController().navigate(R.id.action_homeFragment_to_productsDetailsFragment,bundle)
+        specialProductsAdapter.onClick = { product ->
+            val bundle = Bundle().apply { putParcelable(BUNDLE_KEY_PRODUCT, product) }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_productsDetailsFragment,
+                bundle
+            )
         }
 
-        bestDealsProductsAdapter.onClick = {product ->
-            val bundle = Bundle().apply { putParcelable("product",product)}
-            findNavController().navigate(R.id.action_homeFragment_to_productsDetailsFragment,bundle)
+        bestDealsProductsAdapter.onClick = { product ->
+            val bundle = Bundle().apply { putParcelable(BUNDLE_KEY_PRODUCT, product) }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_productsDetailsFragment,
+                bundle
+            )
         }
 
-        bestProductsAdapter.onClick = {product ->
-            val bundle = Bundle().apply { putParcelable("product",product)}
-            findNavController().navigate(R.id.action_homeFragment_to_productsDetailsFragment,bundle)
+        bestProductsAdapter.onClick = { product ->
+            val bundle = Bundle().apply { putParcelable(BUNDLE_KEY_PRODUCT, product) }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_productsDetailsFragment,
+                bundle
+            )
         }
 
 
         lifecycleScope.launchWhenCreated {
             viewModel.specialProduct.collectLatest {
-                    when (it) {
-                        is Resource.Loading -> {
-                            showLoading()
-                            if (viewModel.getPagingInfoSpecialProducts().specialProductPage > 1)
-                                binding.bestSpecialProgressBar.visibility = View.VISIBLE
-                        }
-
-                        is Resource.Success -> {
-                            binding.bestSpecialProgressBar.visibility = View.GONE
-                            specialProductsAdapter.differ.submitList(it.data)
-                            hideLoading()
-                        }
-
-                        is Resource.Error -> {
-                            hideLoading()
-                            binding.bestSpecialProgressBar.visibility = View.GONE
-                            Toast.makeText(
-                                requireContext(),
-                                it.message.toString(),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-
-                        else -> Unit
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                        if (viewModel.getPagingInfoSpecialProducts().specialProductPage > 1)
+                            binding.bestSpecialProgressBar.visibility = View.VISIBLE
                     }
+
+                    is Resource.Success -> {
+                        binding.bestSpecialProgressBar.visibility = View.GONE
+                        specialProductsAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+
+                    is Resource.Error -> {
+                        hideLoading()
+                        binding.bestSpecialProgressBar.visibility = View.GONE
+                        Toast.makeText(
+                            requireContext(),
+                            it.message.toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    else -> Unit
                 }
+            }
         }
 
         lifecycleScope.launchWhenCreated {
             viewModel.bestDealsProducts.collectLatest {
-                    when (it) {
-                        is Resource.Loading -> {
-                            if (viewModel.getPagingInfoBestDeals().dealsProductPage > 1)
-                                binding.bestDealsProgressBar.visibility = View.VISIBLE
-                        }
-
-                        is Resource.Success -> {
-                            binding.bestDealsProgressBar.visibility = View.GONE
-                            bestDealsProductsAdapter.differ.submitList(it.data)
-
-                        }
-
-                        is Resource.Error -> {
-                            Toast.makeText(
-                                requireContext(),
-                                it.message.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            binding.bestDealsProgressBar.visibility = View.GONE
-
-                        }
-
-                        else -> Unit
+                when (it) {
+                    is Resource.Loading -> {
+                        if (viewModel.getPagingInfoBestDeals().dealsProductPage > 1)
+                            binding.bestDealsProgressBar.visibility = View.VISIBLE
                     }
+
+                    is Resource.Success -> {
+                        binding.bestDealsProgressBar.visibility = View.GONE
+                        bestDealsProductsAdapter.differ.submitList(it.data)
+
+                    }
+
+                    is Resource.Error -> {
+                        Toast.makeText(
+                            requireContext(),
+                            it.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.bestDealsProgressBar.visibility = View.GONE
+
+                    }
+
+                    else -> Unit
                 }
+            }
         }
 
         lifecycleScope.launchWhenCreated {
             viewModel.bestProduct.collectLatest {
-                    when (it) {
-                        is Resource.Loading -> {
-                            binding.bestProductsProgressBar.visibility = View.VISIBLE
-                            Log.d(TAG, "Loading")
-                        }
-
-                        is Resource.Success -> {
-                            bestProductsAdapter.differ.submitList(it.data)
-                            binding.bestProductsProgressBar.visibility = View.GONE
-                            binding.swipeRefreshLayout.isRefreshing = false
-                            Log.d(TAG, "Success")
-
-                        }
-
-                        is Resource.Error -> {
-                            Toast.makeText(
-                                requireContext(),
-                                it.message.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            binding.bestProductsProgressBar.visibility = View.GONE
-                            Log.d(TAG, "Error")
-
-                        }
-
-                        else -> Unit
+                when (it) {
+                    is Resource.Loading -> {
+                        binding.bestProductsProgressBar.visibility = View.VISIBLE
+                        Log.d(TAG, "Loading")
                     }
+
+                    is Resource.Success -> {
+                        bestProductsAdapter.differ.submitList(it.data)
+                        binding.bestProductsProgressBar.visibility = View.GONE
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        Log.d(TAG, "Success")
+
+                    }
+
+                    is Resource.Error -> {
+                        Toast.makeText(
+                            requireContext(),
+                            it.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.bestProductsProgressBar.visibility = View.GONE
+                        Log.d(TAG, "Error")
+
+                    }
+
+                    else -> Unit
                 }
+            }
         }
 
         onScrollBestProductsToBottom()
@@ -176,7 +187,7 @@ class MainCategoryFragment : Fragment(), KodeinAware {
 
     }
 
-    private fun swipeToRefresh(){
+    private fun swipeToRefresh() {
         clearPagingDataWhenUpdateScreen()
         viewModel.fetchBestProducts()
         viewModel.fetchBestDealsProducts()
@@ -185,22 +196,22 @@ class MainCategoryFragment : Fragment(), KodeinAware {
         binding.rvSpecialProducts.smoothScrollToPosition(0)
     }
 
-    private fun onScrollBestProductsToBottom(){
-        binding.nestedScrollMainCategory.setOnScrollChangeListener(NestedScrollView.
-        OnScrollChangeListener{view,_,scrollY,_,_ ->
-            if(view.getChildAt(0).bottom <= view.height + scrollY){
+    private fun onScrollBestProductsToBottom() {
+        binding.nestedScrollMainCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { view, _, scrollY, _, _ ->
+            if (view.getChildAt(0).bottom <= view.height + scrollY) {
                 viewModel.fetchBestProducts()
             }
         })
     }
 
-    private fun onScrollBestDeals(){
-        binding.rvBestDealsProducts.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+    private fun onScrollBestDeals() {
+        binding.rvBestDealsProducts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 val contentWidth = recyclerView.computeHorizontalScrollRange()
-                val currentScroll = recyclerView.computeHorizontalScrollOffset() + recyclerView.width
+                val currentScroll =
+                    recyclerView.computeHorizontalScrollOffset() + recyclerView.width
 
                 if (currentScroll >= contentWidth) {
                     viewModel.fetchBestDealsProducts()
@@ -210,21 +221,22 @@ class MainCategoryFragment : Fragment(), KodeinAware {
         })
     }
 
-    private fun onScrollSpecialProducts(){
-        binding.rvSpecialProducts.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+    private fun onScrollSpecialProducts() {
+        binding.rvSpecialProducts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 val contentWidth = recyclerView.computeHorizontalScrollRange()
-                val currentScroll = recyclerView.computeHorizontalScrollOffset() + recyclerView.width
-                if (currentScroll >= contentWidth){
+                val currentScroll =
+                    recyclerView.computeHorizontalScrollOffset() + recyclerView.width
+                if (currentScroll >= contentWidth) {
                     viewModel.fetchSpecialProducts()
                 }
             }
         })
     }
 
-    private fun clearPagingDataWhenUpdateScreen(){
+    private fun clearPagingDataWhenUpdateScreen() {
         viewModel.updatePagingInfoBestDeals(PagingInfoBestDeals())
         viewModel.updatePagingInfoBestProducts(PagingInfoBestProducts())
         viewModel.updatePagingInfoSpecialProducts(PagingInfoSpecialProducts())
@@ -241,23 +253,26 @@ class MainCategoryFragment : Fragment(), KodeinAware {
     private fun setUpSpecialProductRv() {
         specialProductsAdapter = SpecialProductsAdapter()
         binding.rvSpecialProducts.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = specialProductsAdapter
         }
     }
 
-    private fun setUpBestDealsProductRv(){
+    private fun setUpBestDealsProductRv() {
         bestDealsProductsAdapter = BestDealsProductsAdapter()
         binding.rvBestDealsProducts.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = bestDealsProductsAdapter
         }
     }
 
-    private fun setUpBestProductRv(){
+    private fun setUpBestProductRv() {
         bestProductsAdapter = BestProductsAdapter()
         binding.rvBestProducts.apply {
-            layoutManager = GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false)
+            layoutManager =
+                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             adapter = bestProductsAdapter
         }
     }

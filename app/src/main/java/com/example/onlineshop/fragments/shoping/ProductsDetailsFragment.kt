@@ -28,17 +28,17 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class ProductsDetailsFragment : Fragment(),KodeinAware {
+class ProductsDetailsFragment : Fragment(), KodeinAware {
     private val args by navArgs<ProductsDetailsFragmentArgs>()
-    private lateinit var binding : FragmentProductDetailsBinding
+    private lateinit var binding: FragmentProductDetailsBinding
     private val viewPagerAdapter by lazy { ViewPager2ImagesAdapter() }
     private val sizeAdapter by lazy { SizesAdapter() }
     private val colorsAdapter by lazy { ColorsAdapter() }
-    private var selectedColor : Int ?= null
-    private var selectedSize : String ?= null
+    private var selectedColor: Int? = null
+    private var selectedSize: String? = null
 
     override val kodein by kodein()
-    private val viewModel : DetailsViewModel by instance()
+    private val viewModel: DetailsViewModel by instance()
 
 
     override fun onCreateView(
@@ -47,7 +47,7 @@ class ProductsDetailsFragment : Fragment(),KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
         hideBottomNavigation()
-        binding = FragmentProductDetailsBinding.inflate(inflater,container,false)
+        binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -60,16 +60,16 @@ class ProductsDetailsFragment : Fragment(),KodeinAware {
         setUpColorsRv()
         setUpViewPager()
 
-        sizeAdapter.onItemClick ={
+        sizeAdapter.onItemClick = {
             selectedSize = it
         }
 
-        colorsAdapter.onItemClick ={
+        colorsAdapter.onItemClick = {
             selectedColor = it
         }
 
         binding.butAddToCart.setOnClickListener {
-            if(selectedColor != null && selectedSize != null) {
+            if (selectedColor != null && selectedSize != null) {
                 viewModel.addUpdateProductInCart(
                     CartProduct(
                         product,
@@ -78,22 +78,27 @@ class ProductsDetailsFragment : Fragment(),KodeinAware {
                         selectedSize
                     )
                 )
-            }else{
-                customSnackbarForError(getString(R.string.snackbar_select_color_and_size_text),R.dimen.snackbar_margin_bottom_details)
+            } else {
+                customSnackbarForError(
+                    getString(R.string.snackbar_select_color_and_size_text),
+                    R.dimen.snackbar_margin_bottom_details
+                )
             }
         }
 
 
         lifecycleScope.launchWhenStarted {
             viewModel.amountCheck.collectLatest {
-                when(it){
+                when (it) {
                     is Resource.Success -> {
                         delay(1200)
                         binding.butAddToCart.revertAnimation()
                         customSnackbarForError(
                             getString(R.string.snackbar_max_amount_text_details_fragment),
-                            R.dimen.snackbar_margin_bottom_details)
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
+
                     else -> Unit
                 }
             }
@@ -101,22 +106,28 @@ class ProductsDetailsFragment : Fragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.addToCart.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         binding.butAddToCart.startAnimation()
-                        binding.butAddToCart.background = resources.getDrawable(R.drawable.blue_background)
+                        binding.butAddToCart.background =
+                            resources.getDrawable(R.drawable.blue_background)
                     }
+
                     is Resource.Success -> {
                         binding.butAddToCart.revertAnimation()
                         binding.butAddToCart.background = resources.getDrawable(R.color.black)
                         customSnackbarForComplete(
                             getString(R.string.snackbar_success_add_product_to_car_details_fragment),
-                            R.dimen.snackbar_margin_bottom_details)
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         binding.butAddToCart.revertAnimation()
-                        Toast.makeText(requireContext(),it.message.toString(),Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_LONG)
+                            .show()
                     }
+
                     else -> Unit
                 }
             }
@@ -154,19 +165,19 @@ class ProductsDetailsFragment : Fragment(),KodeinAware {
 
     private fun setUpColorsRv() {
         binding.rvColors.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = colorsAdapter
         }
     }
 
     private fun setUpSizesRv() {
         binding.rvSizes.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = sizeAdapter
         }
     }
-
-
 
 
 }

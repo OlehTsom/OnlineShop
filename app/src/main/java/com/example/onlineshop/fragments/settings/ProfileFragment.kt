@@ -24,17 +24,17 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class ProfileFragment : Fragment(),KodeinAware {
-    private lateinit var binding : FragmentProfileBinding
+class ProfileFragment : Fragment(), KodeinAware {
+    private lateinit var binding: FragmentProfileBinding
     override val kodein by kodein()
-    val viewModel : ProfileViewModel by instance()
+    private val viewModel: ProfileViewModel by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProfileBinding.inflate(layoutInflater,container,false)
+        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -50,7 +50,8 @@ class ProfileFragment : Fragment(),KodeinAware {
         }
 
         binding.linearBilling.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToBillingFragment(0f,
+            val action = ProfileFragmentDirections.actionProfileFragmentToBillingFragment(
+                0f,
                 emptyArray(),
                 false
             )
@@ -60,7 +61,7 @@ class ProfileFragment : Fragment(),KodeinAware {
 
         binding.linearLogOut.setOnClickListener {
             viewModel.logOut()
-            val intent = Intent(requireContext(),LoginRegisterActivity::class.java)
+            val intent = Intent(requireContext(), LoginRegisterActivity::class.java)
             startActivity(intent)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             requireActivity().finish()
@@ -68,21 +69,27 @@ class ProfileFragment : Fragment(),KodeinAware {
 
         lifecycleScope.launchWhenStarted {
             viewModel.user.collectLatest {
-                when(it){
-                    is Resource.Loading ->{
+                when (it) {
+                    is Resource.Loading -> {
                         binding.progressbarSettings.visibility = View.VISIBLE
                     }
-                    is Resource.Success ->{
+
+                    is Resource.Success -> {
                         binding.progressbarSettings.visibility = View.GONE
-                        Glide.with(requireContext()).load(it.data!!.imagePath).
-                        error(ColorDrawable(Color.BLACK)).into(binding.imageUser)
+                        Glide.with(requireContext()).load(it.data!!.imagePath)
+                            .error(ColorDrawable(Color.BLACK)).into(binding.imageUser)
 
                         binding.tvUserName.text = "${it.data.firstName} ${it.data.lastName}"
                     }
-                    is Resource.Error ->{
+
+                    is Resource.Error -> {
                         binding.progressbarSettings.visibility = View.GONE
-                        customSnackbarForError(it.message.toString(),R.dimen.snackbar_margin_bottom_details)
+                        customSnackbarForError(
+                            it.message.toString(),
+                            R.dimen.snackbar_margin_bottom_details
+                        )
                     }
+
                     else -> Unit
                 }
             }

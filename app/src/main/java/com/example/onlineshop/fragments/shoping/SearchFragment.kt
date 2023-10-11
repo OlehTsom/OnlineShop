@@ -64,9 +64,6 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
 
         setCategoryAdapter()
 
-
-
-
         val autoCompleteTextView = binding.edSearchBar
         val adapter = ProductAdapterAutoCompleteText(requireContext(), this)
 
@@ -92,9 +89,10 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
                 val searchText = s.toString()
 
                 if (isKeyboardActive(requireContext())) {
-                            viewModel.searchProduct(searchText.toLowerCase().capitalize())
+                    viewModel.searchProduct(searchText.toLowerCase().capitalize())
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -106,15 +104,18 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
                     is Resource.Loading -> {
                         binding.progressbarAutoCompleteText.visibility = View.VISIBLE
                     }
+
                     is Resource.Success -> {
-                        Log.d("SearchFragment","Success")
+                        Log.d("SearchFragment", "Success")
                         it.data?.let { it1 -> adapter.updateData(it1) }
                         binding.progressbarAutoCompleteText.visibility = View.GONE
-                        hasSearchResults = it.data?.isNotEmpty() == true // Оновити значення залежно від наявності результатів
+                        hasSearchResults =
+                            it.data?.isNotEmpty() == true // Оновити значення залежно від наявності результатів
 
 
                         toggleTextViewVisibility(hasSearchResults)
                     }
+
                     is Resource.Error -> {
                         customSnackbarForError(
                             it.message.toString(),
@@ -127,8 +128,6 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
                 }
             }
         }
-
-
 
 
         categoryAdapter.onClick = {
@@ -158,10 +157,7 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
             }
         }
 
-
     }
-
-
 
     private fun setCategoryAdapter() {
         binding.apply {
@@ -174,12 +170,13 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
     }
 
     private fun isKeyboardActive(context: Context): Boolean {
-        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         return inputMethodManager.isActive
     }
 
 
-    private fun toggleTextViewVisibility(visible : Boolean) {
+    private fun toggleTextViewVisibility(visible: Boolean) {
         if (visible) {
             binding.tvEmptyList.animate()
                 .alpha(0f)
@@ -206,10 +203,7 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
         findNavController().navigate(R.id.action_searchFragment_to_productsDetailsFragment, bundle)
     }
 
-
-
 }
-
 
 interface ProductClickListener {
     fun onProductClick(product: Product)

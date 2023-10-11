@@ -98,27 +98,6 @@ class CategoryViewModel(
         pagingInfoOfferProductsForCategory = newPagingInfo
     }
 
-    fun getPagingInfoBestProducts(): PagingInfoBestProductForBaseCategory {
-        return pagingInfoBestProductsForCategory
-    }
-
-    fun getPagingInfoBestOfferProducts(): PagingInfoOfferProductsForCategory {
-        return pagingInfoOfferProductsForCategory
-    }
-
-    fun updateOfferProducts() {
-        CoroutineScope(Dispatchers.IO).launch{
-            _offerProducts.emit(Resource.Unspecified())
-        }
-    }
-
-    fun updateBestProducts() {
-        CoroutineScope(Dispatchers.IO).launch{
-            _offerProducts.emit(Resource.Unspecified())
-        }
-    }
-
-
 }
 
 data class PagingInfoOfferProductsForCategory(

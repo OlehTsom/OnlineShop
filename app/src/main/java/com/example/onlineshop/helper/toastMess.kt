@@ -26,17 +26,14 @@ fun Fragment.customSnackbarForError(text: String, marginBottom: Int) {
     customSnackbarView.findViewById<TextView>(android.R.id.text1).text = text
     customSnackbarView.findViewById<ImageView>(R.id.icon).setImageResource(R.drawable.ic_cart)
 
-
-
-
     // Заміна вбудованого вигляду на свій
-
     snackbarLayout.setBackgroundColor(Color.TRANSPARENT)
     snackbarLayout.removeAllViews()
     val params = snackbarLayout.layoutParams as ViewGroup.MarginLayoutParams
     view?.resources?.let {
         it.getDimensionPixelSize(marginBottom).let { it1 ->
-            params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
+            params.setMargins(
+                params.leftMargin, params.topMargin, params.rightMargin,
                 it1
             )
         }
@@ -55,25 +52,23 @@ fun Fragment.customSnackbarForComplete(text: String, marginBottom: Int) {
 
     // Інфлейт кастомного макету
     val customSnackbarView = inflater.inflate(R.layout.custom_snackbar, null)
-
     customSnackbarView.visibility = View.VISIBLE
 
     // Налаштування тексту та іконки
     customSnackbarView.findViewById<TextView>(android.R.id.text1).text = text
-    customSnackbarView.findViewById<ImageView>(R.id.icon).setImageResource(R.drawable.ic_cart_more_darckly)
-    customSnackbarView.findViewById<LinearLayout>(R.id.layoutLiner).setBackgroundResource(R.drawable.custom_snackbar_background_success)
-
-
-
+    customSnackbarView.findViewById<ImageView>(R.id.icon)
+        .setImageResource(R.drawable.ic_cart_more_darckly)
+    customSnackbarView.findViewById<LinearLayout>(R.id.layoutLiner)
+        .setBackgroundResource(R.drawable.custom_snackbar_background_success)
 
     // Заміна вбудованого вигляду на свій
-
     snackbarLayout.setBackgroundColor(Color.TRANSPARENT)
     snackbarLayout.removeAllViews()
     val params = snackbarLayout.layoutParams as ViewGroup.MarginLayoutParams
     view?.resources?.let {
         it.getDimensionPixelSize(marginBottom).let { it1 ->
-            params.setMargins(params.leftMargin, params.topMargin, params.rightMargin,
+            params.setMargins(
+                params.leftMargin, params.topMargin, params.rightMargin,
                 it1
             )
         }

@@ -13,12 +13,12 @@ class SizesAdapter : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>() {
 
     private var selectedPosition = -1
 
-    inner class SizesViewHolder(private val binding : SizeRvItemBinding) : ViewHolder(binding.root) {
+    inner class SizesViewHolder(private val binding: SizeRvItemBinding) : ViewHolder(binding.root) {
         fun bind(size: String, position: Int) {
             binding.tvSize.text = size
-            if(position == selectedPosition){
+            if (position == selectedPosition) {
                 binding.imageShadowSizeRv.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.imageShadowSizeRv.visibility = View.INVISIBLE
             }
         }
@@ -36,7 +36,7 @@ class SizesAdapter : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>() {
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SizesViewHolder {
@@ -53,10 +53,10 @@ class SizesAdapter : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>() {
 
     override fun onBindViewHolder(holder: SizesViewHolder, position: Int) {
         val size = differ.currentList[position]
-        holder.bind(size,position)
+        holder.bind(size, position)
 
-        holder.itemView.setOnClickListener{
-            if (selectedPosition >= 0){
+        holder.itemView.setOnClickListener {
+            if (selectedPosition >= 0) {
                 notifyItemChanged(selectedPosition)
             }
             selectedPosition = holder.adapterPosition
@@ -65,6 +65,6 @@ class SizesAdapter : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>() {
         }
     }
 
-    var onItemClick: ((String) -> Unit) ?= null
+    var onItemClick: ((String) -> Unit)? = null
 
 }

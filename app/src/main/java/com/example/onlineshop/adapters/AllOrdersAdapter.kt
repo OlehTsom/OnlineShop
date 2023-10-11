@@ -14,13 +14,13 @@ import com.example.onlineshop.data.getOrderStatus
 import com.example.onlineshop.databinding.OrderItemBinding
 
 class AllOrdersAdapter : RecyclerView.Adapter<AllOrdersAdapter.OrdersViewHolder>() {
-    inner class OrdersViewHolder(val binding : OrderItemBinding) : ViewHolder(binding.root) {
+    inner class OrdersViewHolder(val binding: OrderItemBinding) : ViewHolder(binding.root) {
         fun bind(order: Order) {
             binding.tvOrderId.text = order.orderId.toString()
             binding.tvOrderDate.text = order.data
             val resources = itemView.resources
 
-            val colorDrawable = when(getOrderStatus(order.orderStatus)){
+            val colorDrawable = when (getOrderStatus(order.orderStatus)) {
                 is OrderStatus.Ordered -> ColorDrawable(resources.getColor(R.color.g_orange_yellow))
                 is OrderStatus.Confirmed -> ColorDrawable(resources.getColor(R.color.g_green))
                 is OrderStatus.Delivered -> ColorDrawable(resources.getColor(R.color.g_green))
@@ -34,7 +34,7 @@ class AllOrdersAdapter : RecyclerView.Adapter<AllOrdersAdapter.OrdersViewHolder>
 
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Order>(){
+    private val diffCallback = object : DiffUtil.ItemCallback<Order>() {
         override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
             return oldItem.orderId == newItem.orderId
         }
@@ -45,7 +45,7 @@ class AllOrdersAdapter : RecyclerView.Adapter<AllOrdersAdapter.OrdersViewHolder>
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallback)
+    val differ = AsyncListDiffer(this, diffCallback)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
@@ -72,5 +72,5 @@ class AllOrdersAdapter : RecyclerView.Adapter<AllOrdersAdapter.OrdersViewHolder>
 
     }
 
-    var onClick : ((Order) -> Unit) ?= null
+    var onClick: ((Order) -> Unit)? = null
 }
