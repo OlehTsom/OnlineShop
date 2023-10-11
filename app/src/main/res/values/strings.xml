@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OnlineShop</string>
+    <string name="app_name">Karma</string>
     <string name="rightAddress">The Right Address\nFor Shopping\nAny day</string>
     <string name="quality">It is now very easy to reach the\nbest quality among the\nproducts on the internet!</string>
     <string name="snacbar_reset_text_login_fragment">Reset link was send o your email</string>

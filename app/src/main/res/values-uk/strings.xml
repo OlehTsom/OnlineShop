@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OnlineShop</string>
+    <string name="app_name">Karma</string>
     <string name="rightAddress">Вибір найкращих\nГарних покупок\nСлава Україні!</string>
     <string name="quality">Тепер дуже легко досягти\nнайкращої якості серед\nпродуктів в Інтернеті!</string>
     <string name="snacbar_reset_text_login_fragment">Посилання для скидання надіслано на вашу електронну адресу</string>
