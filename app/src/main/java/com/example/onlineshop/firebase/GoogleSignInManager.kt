@@ -2,17 +2,24 @@ package com.example.onlineshop.firebase
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import com.example.onlineshop.R
+import com.example.onlineshop.util.ConfigManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import org.json.JSONObject
 
 class GoogleSignInManager(private val context: Context, private val googleSignInLauncher : ActivityResultLauncher<Intent>) {
 
 
     fun startGoogleSignIn() {
+        val configManager = ConfigManager()
+        val config = configManager.loadConfig(context)
+        val requestIdToken = config.google_request_id_token
+
         val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(context.getString(R.string.default_web_client_id))
+            .requestIdToken(requestIdToken)
             .requestEmail()
             .build()
         val signInClient = GoogleSignIn.getClient(context, options)
