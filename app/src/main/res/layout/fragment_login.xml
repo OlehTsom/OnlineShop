@@ -41,7 +41,6 @@
             android:gravity="center"
             android:text="@string/dont_have_an_account_register"
             android:textAlignment="center"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tvLetsLogin"
             app:layout_constraintTop_toBottomOf="@+id/tvLetsLogin" />
 
