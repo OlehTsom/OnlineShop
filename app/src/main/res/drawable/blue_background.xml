@@ -2,7 +2,7 @@
     <gradient
         android:type="linear"
         android:angle="0"
-        android:startColor="@color/g_blue"
-        android:endColor="@color/light_blue" />
+        android:startColor="#247158"
+        android:endColor="#6AB29B" />
     <corners android:radius="@dimen/buttonCorners"/>
 </shape>

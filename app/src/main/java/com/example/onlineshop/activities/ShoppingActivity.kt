@@ -51,7 +51,7 @@ class ShoppingActivity : AppCompatActivity(), BottomNavigationListener, KodeinAw
                             findViewById<BottomNavigationView>(R.id.bottom_navigation)
                         bottomNavigation.getOrCreateBadge(R.id.cardFragment).apply {
                             number = amount
-                            backgroundColor = resources.getColor(R.color.g_blue)
+                            backgroundColor = resources.getColor(R.color.g_braun)
                         }
                     }
 
