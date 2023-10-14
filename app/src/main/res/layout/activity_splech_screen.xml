@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/test"
+    android:background="@drawable/green_back"
     tools:context=".activities.SplashScreenActivity">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -16,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.55"
         app:lottie_autoPlay="true"
         app:lottie_fileName="gift1.json"
         app:lottie_loop="false"
-        app:lottie_speed="1.55" />
+        app:lottie_speed="1.57" />
 
     <TextView
         android:id="@+id/tvAppName"
