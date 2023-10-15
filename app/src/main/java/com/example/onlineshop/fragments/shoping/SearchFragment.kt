@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat.getSystemService
@@ -63,6 +64,7 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setCategoryAdapter()
+        closeKeyboardWhenPressDone()
 
         val autoCompleteTextView = binding.edSearchBar
         val adapter = ProductAdapterAutoCompleteText(requireContext(), this)
@@ -75,6 +77,9 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
                 onProductClick(it)
             }
         }
+
+
+
 
         binding.edSearchBar.addTextChangedListener(object : TextWatcher {
             private var searchJob: Job? = null // Зберігаємо посилання на запущену задачу
@@ -157,6 +162,24 @@ class SearchFragment : Fragment(), KodeinAware, ProductClickListener {
             }
         }
 
+    }
+
+    fun closeKeyboardWhenPressDone(){
+        binding.edSearchBar.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
+                || actionId == EditorInfo.IME_ACTION_DONE
+            ) {
+                hideKeyboard(requireContext())
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
+    }
+
+    fun hideKeyboard(context: Context) {
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(binding.edSearchBar.windowToken, 0)
     }
 
     private fun setCategoryAdapter() {
