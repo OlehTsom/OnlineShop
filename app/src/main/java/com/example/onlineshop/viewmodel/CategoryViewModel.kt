@@ -33,9 +33,10 @@ class CategoryViewModel(
 
     fun fetchOfferProducts(){
         if (!pagingInfoOfferProductsForCategory.isPagingEnd) {
-            CoroutineScope(Dispatchers.IO).launch {
+            viewModelScope.launch {
                 _offerProducts.emit(Resource.Loading())
             }
+
             firestore.collection(COLLECTION_PATH_PRODUCTS)
                 .whereEqualTo(FIELD_PATH_CATEGORY, category)
                 .whereNotEqualTo(FIELD_PATH_OFFER_PERCENTAGE, null)
@@ -47,14 +48,14 @@ class CategoryViewModel(
                     pagingInfoOfferProductsForCategory.isPagingEnd =
                         product == pagingInfoOfferProductsForCategory.oldOfferProducts
                     pagingInfoOfferProductsForCategory.oldOfferProducts = product
-                    CoroutineScope(Dispatchers.IO).launch {
+                    viewModelScope.launch {
                         Log.d("BaseCategoryViewModelSuccess","Success Offer")
                         _offerProducts.emit(Resource.Success(product))
                     }
                     pagingInfoOfferProductsForCategory.offerProductPage++
                 }
                 .addOnFailureListener {
-                    CoroutineScope(Dispatchers.IO).launch {
+                    viewModelScope.launch {
                         _offerProducts.emit(Resource.Error(it.message.toString()))
                     }
                 }
@@ -63,7 +64,7 @@ class CategoryViewModel(
 
     fun fetchBestProducts(){
         if (!pagingInfoBestProductsForCategory.isPagingEnd) {
-            CoroutineScope(Dispatchers.IO).launch {
+            viewModelScope.launch {
                 _bestProducts.emit(Resource.Loading())
             }
             firestore.collection(COLLECTION_PATH_PRODUCTS)
@@ -76,14 +77,14 @@ class CategoryViewModel(
                     pagingInfoBestProductsForCategory.isPagingEnd =
                         product == pagingInfoBestProductsForCategory.oldBestProducts
                     pagingInfoBestProductsForCategory.oldBestProducts = product
-                    CoroutineScope(Dispatchers.IO).launch {
+                    viewModelScope.launch {
                         Log.d("BaseCategoryViewModelSuccess","Success Best Products")
                         _bestProducts.emit(Resource.Success(product))
                     }
                     pagingInfoBestProductsForCategory.bestProductPage++
                 }
                 .addOnFailureListener {
-                    CoroutineScope(Dispatchers.IO).launch {
+                    viewModelScope.launch {
                         _bestProducts.emit(Resource.Error(it.message.toString()))
                     }
                 }
