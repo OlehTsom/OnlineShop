@@ -108,4 +108,10 @@
     <string name="go_out">Вийти</string>
     <string name="user__not_connected_to_a_network">Користувач наразі не підключений до мережі або немає підключення до Інтернету. Будь ласка спробуйте ще раз.</string>
     <string name="logo_name">KaRmA</string>
+    <string-array name="sorted_items">
+        <item>By default</item>
+        <item>Price: High-Low</item>
+        <item>Price: Low-High</item>
+        <item>By name</item>
+    </string-array>
 </resources>

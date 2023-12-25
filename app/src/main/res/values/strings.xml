@@ -108,4 +108,10 @@
     <string name="go_out">Exit</string>
     <string name="user__not_connected_to_a_network">User is currently not connected to a network or there is no internet connection available. Please try again.</string>
     <string name="logo_name">KaRmA</string>
+    <string-array name="sorted_items">
+        <item>By default</item>
+        <item>Price: High-Low</item>
+        <item>Price: Low-High</item>
+        <item>By name</item>
+    </string-array>
 </resources>

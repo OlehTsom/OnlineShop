@@ -20,5 +20,6 @@ object Constants {
     const val FIELD_PATH_NAME = "name"
     const val COLLECTION_PATH_ORDERS = "orders"
     const val COLLECTION_PATH_SUPPORT = "Support"
+    const val FIELD_PATH_PRICE = "price"
 
 }

@@ -1,12 +1,11 @@
 package com.example.onlineshop.fragments.categories.search
 
-import android.animation.Animator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
+import android.widget.AdapterView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlineshop.R
 import com.example.onlineshop.adapters.BestProductsAdapter
-import com.example.onlineshop.data.Product
 import com.example.onlineshop.databinding.FragmentSearchCategoryBaseBinding
 import com.example.onlineshop.helper.hideBottomNavigation
 import com.example.onlineshop.util.Constants.BUNDLE_KEY_PRODUCT
@@ -41,6 +39,7 @@ import org.kodein.di.generic.instance
 
 class SearchCategoryBase : Fragment(), KodeinAware {
     lateinit var binding: FragmentSearchCategoryBaseBinding
+    private var positionSpinner = 0
     private val args by navArgs<SearchCategoryBaseArgs>()
     private val offerAdapter: BestProductsAdapter by lazy { BestProductsAdapter() }
     private val bestProductsAdapter: BestProductsAdapter by lazy { BestProductsAdapter() }
@@ -66,11 +65,7 @@ class SearchCategoryBase : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         setUpAdapters()
-
-
 
         offerAdapter.onClick = { product ->
             val bundle = Bundle().apply { putParcelable(BUNDLE_KEY_PRODUCT, product) }
@@ -135,6 +130,7 @@ class SearchCategoryBase : Fragment(), KodeinAware {
                         }
                         binding.bestProductsProgressBarSearch.hideView()
                         bestProductsAdapter.differ.submitList(it.data)
+                        createItemSelectedListener()
                     }
 
                     is Resource.Error -> {
@@ -167,6 +163,7 @@ class SearchCategoryBase : Fragment(), KodeinAware {
 
         binding.swipeRefreshSearchCategory.setOnRefreshListener {
             refreshScreen()
+            setFilterByDefault()
         }
 
     }
@@ -174,7 +171,6 @@ class SearchCategoryBase : Fragment(), KodeinAware {
     private fun stopShimmer() {
         binding.shimmerVertical.stopShimmer()
         binding.shimmerVertical.visibility = View.GONE
-
         binding.shimmerHorizontal.stopShimmer()
         binding.shimmerHorizontal.visibility = View.GONE
         binding.offerProductsProgressBarSearchCat.hideView()
@@ -187,7 +183,12 @@ class SearchCategoryBase : Fragment(), KodeinAware {
     }
 
     private fun onBestProductsPagingRequest() {
-        viewModel.fetchBestProducts()
+        when(positionSpinner){
+            SortingOptions.DEFAULT -> viewModel.fetchBestProducts()
+            SortingOptions.HIGHEST_TO_LOWEST -> viewModel.fetchBestProducts(Filtered.FROM_HIGHEST_PRICE_TO_LOWEST)
+            SortingOptions.LOWEST_TO_HIGHEST -> viewModel.fetchBestProducts(Filtered.FROM_LOWEST_PRICE_TO_HIGHEST)
+            SortingOptions.BY_NAME -> viewModel.fetchBestProducts(Filtered.BY_NAME)
+        }
     }
 
     private fun onOfferPagingRequest() {
@@ -199,6 +200,51 @@ class SearchCategoryBase : Fragment(), KodeinAware {
         viewModel.fetchBestProducts()
         viewModel.fetchOfferProducts()
     }
+
+    private fun setFilterByDefault(){
+        binding.spSorted.setSelection(0)
+    }
+
+    private fun createItemSelectedListener(){
+        binding.apply {
+            spSorted.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, popsition: Int, id: Long) {
+                    positionSpinner = when(popsition){
+                        SortingOptions.DEFAULT -> {
+                            clearPagingDataWhenUpdateScreen(viewModel)
+                            viewModel.fetchBestProducts()
+                            SortingOptions.DEFAULT
+                        }
+                        SortingOptions.HIGHEST_TO_LOWEST -> {
+                            clearPagingDataWhenUpdateScreen(viewModel)
+                            viewModel.fetchBestProducts(Filtered.FROM_HIGHEST_PRICE_TO_LOWEST)
+                            SortingOptions.HIGHEST_TO_LOWEST
+                        }
+                        SortingOptions.LOWEST_TO_HIGHEST -> {
+                            clearPagingDataWhenUpdateScreen(viewModel)
+                            viewModel.fetchBestProducts(Filtered.FROM_LOWEST_PRICE_TO_HIGHEST)
+                            SortingOptions.LOWEST_TO_HIGHEST
+                        }
+                        SortingOptions.BY_NAME -> {
+                            clearPagingDataWhenUpdateScreen(viewModel)
+                            viewModel.fetchBestProducts(Filtered.BY_NAME)
+                            SortingOptions.BY_NAME
+                        }
+                        else -> {
+                            SortingOptions.DEFAULT
+                        }
+                    }
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    //TODO("Not yet implemented")
+                }
+
+            }
+        }
+    }
+
+
 
     private fun setUpAdapters() {
         binding.rvOfferSearchCategory.apply {
@@ -250,4 +296,17 @@ class SearchCategoryBase : Fragment(), KodeinAware {
 
         }
     }
+}
+
+enum class Filtered{
+    FROM_LOWEST_PRICE_TO_HIGHEST,
+    FROM_HIGHEST_PRICE_TO_LOWEST,
+    BY_NAME
+}
+
+object SortingOptions {
+    const val DEFAULT = 0
+    const val HIGHEST_TO_LOWEST = 1
+    const val LOWEST_TO_HIGHEST = 2
+    const val BY_NAME = 3
 }
